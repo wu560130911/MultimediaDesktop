@@ -14,7 +14,7 @@
 * [系统处理流程](#h4)
 * [如何部署本系统](#h5)
 * [系统功能](#h6)
-* [系统功能截图](#h7)
+* [系统功能截图](#h8)
 
 <a name="h1"/>
 ## 系统项目结构
@@ -40,13 +40,15 @@ Zookeeper，MemCache，Mysql（默认，可选择其他的），Tomcat（默认�
 ![](https://github.com/wu560130911/MultimediaDesktop/blob/master/deploy/pictures/web%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B.png)<br>
 <a name="h5"/>
 ## 如何部署本系统
-请参见本人博文（目前系统的sql还没有导出，后期会上传），[分布式桌面多媒体共享平台](http://my.oschina.net/WMSstudio/blog/408026)。<br>
+在deploy/sql里包含本系统的sql文件，导入数据库即可。
+项目对打包进行了处理，服务端将打包成文件夹，包含执行脚本。消费端将打包成文件夹（war文件）和静态资源文件（经过压缩）。
+请参见本人博文，[分布式桌面多媒体共享平台](http://my.oschina.net/WMSstudio/blog/408026)。<br>
 <a name="h6"/>
 ## 系统功能
 如图所示。<br>
 ![](https://github.com/wu560130911/MultimediaDesktop/blob/master/deploy/pictures/%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E5%9B%BE.png)<br>
 
-<a name="h7"/>
+<a name="h8"/>
 ## 系统功能截图
 ![](https://github.com/wu560130911/MultimediaDesktop/blob/master/deploy/pictures/1.png)<br>
 ![](https://github.com/wu560130911/MultimediaDesktop/blob/master/deploy/pictures/2.png)<br>
