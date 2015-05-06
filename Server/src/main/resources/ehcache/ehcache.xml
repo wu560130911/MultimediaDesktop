@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache updateCheck="false">
+
+	<diskStore path="java.io.tmpdir/ehcache/hibernate" />
+
+	<defaultCache maxEntriesLocalHeap="10000" eternal="false"
+		timeToIdleSeconds="300" timeToLiveSeconds="600" overflowToDisk="true"
+		maxEntriesLocalDisk="100000" />
+	<!--Hibernate使用时间戳区域来决定被高速缓存的查询结果集是否是失效的。当你重新执行了一个启用了高速缓存的查询时，Hibernate就在时间戳缓存中查找对被查询的（几张）表所做的最近插入、更新或删除的时间戳。如果找到的时间戳晚于高速缓存查询结果的时间戳，那么缓存结果将被丢弃，重新执行一次查询。 -->
+	<cache name="org.hibernate.cache.spi.UpdateTimestampsCache"
+		maxElementsInMemory="5000" eternal="true" overflowToDisk="false" />
+
+	<cache name="org.hibernate.cache.internal.StandardQueryCache"
+		maxElementsInMemory="10000" eternal="false" timeToLiveSeconds="300"
+		overflowToDisk="false" />
+
+	<!-- 指定区域cache：通过name指定，name对应到Hibernate中的区域名即可 -->
+	<!-- <cache name="org.persistence.User" eternal="false"
+		maxEntriesLocalHeap="1000" overflowToDisk="true" maxEntriesLocalDisk="10000"
+		maxElementsInMemory="200" timeToIdleSeconds="1200" timeToLiveSeconds="1200">
+	</cache> -->
+
+</ehcache>
+
+<!-- maxElementsInMemory=“10000” //Cache中最多允许保存的数据对象的数量 external=“false” 
+	//缓存中对象是否为永久的，如果是，超时设置将被忽略，对象从不过期 timeToIdleSeconds=“1000” //缓存数据钝化时间(设置对象在它过期之前的空闲时间) 
+	timeToLiveSeconds=“1000” //缓存数据的生存时间(设置对象在它过期之前的生存时间) overflowToDisk=“false” 
+	/> //内存不足时，是否启用磁盘缓存 memoryStoreEvictionPolicy="LRU" //内存不足时数据对象的清除策略 ehcache中缓存的3种清空策略： 
+	FIFO(first in first out):先进先出 LFU( Less Frequently Used):一直以来最少被使用的。如上面所讲，缓存的元素有一个hit属性，hit值最小的将会被清出缓存。 
+	LRU(Least Recently Used):最近最少使用的，缓存的元素有一个时间戳，当缓存容量满了，而又需要腾出地方来缓存新的元素的时候，那么现有缓存元素中时间戳离当前时间最远的元素将被清出缓存。 -->

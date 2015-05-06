@@ -1,0 +1,195 @@
+.notice{
+	background-image: url(../image/notice.png) !important;
+}
+.feedback{
+	background-image: url(../image/feedback.png) !important;
+}
+.admin{
+	background-image: url(../image/admin.png) !important;
+}
+.icon_customer{
+    background-image: url(../image/icon_customer.png) !important;
+}
+.icon_customer{
+    background-image: url(../image/icon_customer.png) !important;
+}
+.icon_address{
+    background-image: url(../image/icon_address.png) !important;
+}
+.icon_good{
+    background-image: url(../image/icon_good.png) !important;
+}
+.icon_goodtype{
+    background-image: url(../image/icon_goodtype.png) !important;
+}
+.icon_order{
+    background-image: url(../image/icon_order.png) !important;
+}
+.icon_orderdetail{
+    background-image: url(../image/icon_orderdetail.png) !important;
+}
+.icon_notice{
+    background-image: url(../image/icon_notice.png) !important;
+}
+.icon_feedback{
+    background-image: url(../image/icon_feedback.png) !important;
+}
+.icon_table{
+    background-image: url(../image/icon_table.png) !important;
+}
+.icon_tree{
+    background-image: url(../image/icon_tree.png) !important;
+}
+.icon_system{
+    background-image: url(../image/icon_system.png) !important;
+}
+.icon_admin{
+    background-image: url(../image/icon_admin.png) !important;
+}
+.table_remove{
+	background-image: url(../image/table_remove.gif) !important;
+}
+.table_add{
+	background-image: url(../image/table_add.png) !important;
+}
+.table_edit{
+	background-image: url(../image/table_edit.png) !important;
+}
+.table_save{
+	background-image: url(../image/tabel_save.png) !important;
+}
+.system_edit{
+	background-image: url(../image/system_edit.png) !important;
+}
+.system_out{
+	background-image: url(../image/system_out.png) !important;
+}
+.system_cascade{
+	background-image: url(../image/system_cascade.png) !important;
+}
+.system_tile{
+	background-image: url(../image/system_tile.png) !important;
+}
+.search{
+	background-image: url(../image/search.gif) !important;
+}
+
+.music_list_desktop{
+	background-image: url(../image/music_list.png) !important;
+}
+.music_list_desktop_mini{
+	background-image: url(../image/music.png) !important;
+}
+.music_add_desktop{
+	background-image: url(../image/music_add_desktop.png) !important;
+}
+.music_add_desktop_mini{
+	background-image: url(../image/music_add.png) !important;
+}
+.music_main{
+	background-image: url(../image/music_main.png) !important;
+}
+.music_main_mini{
+	background-image: url(../image/music_main_.png) !important;
+}
+.video_play_main{
+	background-image: url(../image/video_play.png) !important;
+}
+.video_play_main_mini{
+	background-image: url(../image/video_icon.png) !important;
+}
+
+.check_music_desktop{
+	background-image: url(../image/check_music.png) !important;
+}
+.check_music_desktop_mini{
+	background-image: url(../image/check_music_ini.png) !important;
+}
+
+.check_movie{
+	background-image: url(../image/check_movie.png) !important;
+}
+.check_movie_mini{
+	background-image: url(../image/check_movie_mini.png) !important;
+}
+
+.video_add_desktop{
+	background-image: url(../image/video_add_desktop.png) !important;
+}
+.video_add_desktop_mini{
+	background-image: url(../image/video_add.gif) !important;
+}
+.video_list_desktop{
+	background-image: url(../image/video_list_desktop.png) !important;
+}
+.video_list_desktop_mini{
+	background-image: url(../image/video_list.gif) !important;
+}
+.wms_help{
+	background-image: url(../image/setting.png) !important;
+}
+.wms_notebook_main{
+	background-image: url(../image/notebook_all.gif) !important;
+}
+.video_play_list{
+	background-image: url(../image/video_list.png) !important;
+}
+.video_more_info{
+	background-image: url(../image/video_detail.png) !important;
+}
+.media_play{
+	background-image: url(../image/media_play.gif) !important;
+}
+.media_collect{
+	background-image: url(../image/media_collect.png) !important;
+}
+.media_play_list{
+	background-image: url(../image/media_play_list.png) !important;
+}
+.delete{
+	background-image: url(../image/delete.png) !important;
+}
+.appManager_icon{
+	background-image: url(../image/application.png) !important;
+}
+.appManager_icon_mini{
+	background-image: url(../image/applications-min.png) !important;
+}
+
+.user_manage_desktop{
+	background-image: url(../image/user_manage.png) !important;
+}
+.user_manage_desktop_mini{
+	background-image: url(../image/user_manage_mini.png) !important;
+}
+.x-tab-tabmenu-right {
+    background: transparent url('../images/tab-scroller-menu.gif') no-repeat 0 0;
+    width:18px;
+    height: 20px;
+    cursor:pointer;
+    zoom: 1;
+    z-index: 6;
+    float: right;
+}
+.x-tab-tabmenu-over {
+    background-position: -18px 0;
+}
+.x-tab-tabmenu-disabled {
+    background-position: 0 0;
+    opacity:.5;
+    -moz-opacity:.5;
+    filter:alpha(opacity=50);
+    cursor:default;
+}
+.wallpaper_cls{
+	background-image: url(../image/wallpaper.png) !important;
+}
+.wallpaper_cls_mini{
+	background-image: url(../image/wallpaper_mini.png) !important;
+}
+.system_log_desktop{
+	background-image: url(../image/system_log_desktop.png) !important;
+}
+.system_log_desktop_mini{
+	background-image: url(../image/system_log_desktop_mini.png) !important;
+}

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	default-lazy-init="true"
+	xsi:schemaLocation="http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<!-- 扫描注解包路径，多个包用逗号分隔，不填pacakge表示扫描当前ApplicationContext中所有的类 -->
+	<dubbo:annotation package="com.wms.studio.service" />
+
+	<dubbo:service interface="com.wms.studio.api.service.UserService"
+		ref="userService" accesslog="true">
+		<dubbo:method name="setUserTheme" async="true" return="false"></dubbo:method>
+	</dubbo:service>
+
+	<dubbo:service interface="com.wms.studio.api.service.LoginIpService"
+		ref="loginIpService" accesslog="true">
+		<dubbo:method name="addLoginIp" async="true" return="false"></dubbo:method>
+	</dubbo:service>
+
+	<dubbo:service interface="com.wms.studio.api.service.MailService"
+		ref="mailService" accesslog="true"></dubbo:service>
+
+	<dubbo:service interface="com.wms.studio.api.service.WallpaperService"
+		ref="wallpaperService" accesslog="true"></dubbo:service>
+
+	<dubbo:service interface="com.wms.studio.api.service.ApplicationService"
+		ref="applicationService" accesslog="true"></dubbo:service>
+
+	<dubbo:service interface="com.wms.studio.api.service.UserApplicationService"
+		ref="userApplicationService" accesslog="true"></dubbo:service>
+
+	<dubbo:service interface="com.wms.studio.api.service.MusicService"
+		ref="musicService" accesslog="true"></dubbo:service>
+
+	<dubbo:service interface="com.wms.studio.api.service.MovieService"
+		ref="movieService" accesslog="true"></dubbo:service>
+
+	<dubbo:service interface="com.wms.studio.api.service.MusicPlaylistService"
+		ref="musicPlaylistService" accesslog="true"></dubbo:service>
+
+	<dubbo:service interface="com.wms.studio.api.service.MoviePlaylistService"
+		ref="moviePlaylistService" accesslog="true"></dubbo:service>
+
+	<dubbo:service interface="com.wms.studio.api.service.BuiltInApplicationService"
+		ref="builtInApplicationService" accesslog="true"></dubbo:service>
+
+	<dubbo:service interface="com.wms.studio.api.service.CreditService"
+		ref="creditService" accesslog="true"></dubbo:service>
+
+	<dubbo:service interface="com.wms.studio.api.service.SystemLogService"
+		ref="systemLogService" accesslog="true"></dubbo:service>
+</beans>

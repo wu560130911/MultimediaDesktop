@@ -1,0 +1,65 @@
+{
+    "children":[
+        {
+            "text":"个人信息",
+            "leaf":false,
+            "children":[
+                {
+                    "text":"查看我的信息",
+                    "leaf":true,
+                    "aliasname":"userInfo"
+                },
+                {
+                    "text":"修改信息",
+                    "leaf":true,
+                    "aliasname":"userModify"
+                },
+                {
+                    "text":"修改密码",
+                    "leaf":true,
+                    "aliasname":"userModifyPassword"
+                },
+                {
+                    "text":"修改绑定邮箱",
+                    "leaf":true,
+                    "aliasname":"userModifyEmail"
+                }
+            ]
+            
+        },
+        {
+            "text":"用户日志",
+            "leaf":false,
+            "children":[
+                {
+                    "text":"登录日志",
+                    "leaf":true,
+                    "aliasname":"loginLogList"
+                },
+                {
+                    "text":"积分日志",
+                    "leaf":true,
+                    "aliasname":"creditList"
+                }
+            ]
+            
+        },
+        {
+            "text":"用户管理",
+            "leaf":false,
+            "children":[
+                {
+                    "text":"用户列表",
+                    "leaf":true,
+                    "aliasname":"userList"
+                },
+                {
+                    "text":"在线用户管理",
+                    "leaf":true,
+                    "aliasname":"userOnlineList"
+                }
+            ]
+            
+        }
+    ]
+}

@@ -1,0 +1,365 @@
+@media (min-width: 769px) and (max-width: 993px) {
+    
+    .sr-header-right{
+        margin-top: -20px;
+        margin-bottom: -10px;
+        clear: both;
+    }
+    .sr-header-left{
+        margin-top: 0px;
+    }
+    .sr-header-left,
+    .sr-header-right{
+        text-align: center;
+        display: block;
+        width: 100%;
+    }
+}
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+    /* navbar */
+    .navbar-helper .panel-sitename h1,
+    .navbar-helper .panel-sitename h2,
+    .navbar-helper .panel-sitename h3,
+    .navbar-helper .panel-sitename h4,
+    .navbar-helper .panel-sitename h5,
+    .navbar-helper .panel-sitename h6{
+        font-size: 1.7em;
+    }
+    ul.dropdown-notification{
+        width: 250px;
+        min-width: 250px;
+    }
+    /* end navbar */
+
+    /** sidebar */
+    .sidebar > li .sidebar-text{
+        font-size: .8em;
+    }
+    /** end sidebar */
+    
+    /** sidebar-right */
+    .side-right{
+        width: 15.3%;
+    }
+    /** end sidebar-right */
+    
+    /** message */
+    .message-contact ul.contact-list li.contact-alt .status{
+        display: none;
+    }
+    /** end message */
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+    
+    /* header */
+    .header{
+        position: relative;
+        background-color: #00a0b1;
+        background-image: -moz-linear-gradient(top, #00a0b1, #008299);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#00a0b1), to(#008299));
+        background-image: -webkit-linear-gradient(top, #00a0b1, #008299);
+        background-image: -o-linear-gradient(top, #00a0b1, #008299);
+        background-image: linear-gradient(to bottom, #00a0b1, #008299);
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff00a0b1', endColorstr='#ff008299', GradientType=0);
+    }
+    .header.fixed,
+    .side-left.fixed,
+    .side-right.fixed{
+        position: relative;
+        top: 0px;
+    }
+    
+    .control-mode{
+        display: none;
+    }
+    
+    /* navbar */
+    .navbar-helper .panel-sitename h1,
+    .navbar-helper .panel-sitename h2,
+    .navbar-helper .panel-sitename h3,
+    .navbar-helper .panel-sitename h4,
+    .navbar-helper .panel-sitename h5,
+    .navbar-helper .panel-sitename h6{
+        font-size: 2em;
+        color: #F1F1F1;
+    }
+
+    .navbar-helper .panel-search,
+    .navbar-helper .panel-ext{
+        padding-top: 0px;
+        padding-left: 20px;
+        margin-bottom: 10px;
+    }
+    .panel-ext{
+        margin-left: 0px;
+    }
+    .navbar-helper .panel-search input{
+        width: 100%;
+    }
+    
+    .user-group > a:first-child img{
+        display: none;
+    }
+    .user-group > a:first-child .btn{
+        display: inline-block;
+    }
+    .user-group .dropdown-user{
+        margin-left: -100%;
+        min-width: 260px;
+    }
+
+    /* end navbar */
+    
+    
+    /* end header */
+
+    /** sidebar**/
+    .side-left{
+        position: relative;
+        top: auto;
+        width: 100%;
+        display: block;
+        z-index: 1;
+        border-left: none;
+        border-right: none;
+        min-height: 60px;
+    }
+    .side-right{
+        position: relative;
+        display: table-cell;
+        z-index: 1;
+        margin: 10px auto 20px 0px;
+        top: 60px;
+    }
+
+    .sidebar{
+        margin: auto;
+        display: table;
+        text-align: center;
+    }
+    .sidebar > li{
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        white-space: nowrap;
+    }
+    .sidebar > li.active:after, .sidebar > li.active:before{
+        display: none;
+    }
+
+    .sidebar > li.active:after{
+        display: none;
+    }
+
+    .sidebar > li.active:before{
+        display: none;
+    }
+    /** end sidebar**/
+
+    /** sub-sidebar **/
+    .sub-sidebar{
+        top: 100%;
+        left: -20%;
+        white-space: normal;
+
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-fill-mode: both;
+        -moz-animation-fill-mode: both;
+        -o-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation-name: fadeInDown;
+        -moz-animation-name: fadeInDown;
+        -o-animation-name: fadeInDown;
+        animation-name: fadeInDown;
+    }
+    .sub-sidebar-form{
+        top: 100%;
+        left: -100%;
+        white-space: normal;
+
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-fill-mode: both;
+        -moz-animation-fill-mode: both;
+        -o-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation-name: fadeInDown;
+        -moz-animation-name: fadeInDown;
+        -o-animation-name: fadeInDown;
+        animation-name: fadeInDown;
+    }
+    .sub-sidebar:before, .sub-sidebar:after,
+    .sub-sidebar-form:before, .sub-sidebar-form:after{
+        top: -9px;
+    }
+    .sub-sidebar:after,
+    .sub-sidebar-form:after{
+        border-color: rgba(255, 255, 255, 0);
+        border-bottom-color: #FFFFFF;
+        border-width: 11px;
+        left: 50%;
+        margin-left: -11px;
+    }
+
+    .sub-sidebar:before,
+    .sub-sidebar-form:before{
+        border-color: rgba(215, 215, 215, 0);
+        border-bottom-color: #CDCDCD;
+        border-width: 10px;
+        left: 50%;
+        margin-left: -10px;
+    }
+    .sub-sidebar li.divider{
+        border: none;
+        border-bottom: 1px solid #CDCDCD;
+        width: 100%;
+        height: 2px;
+        padding: 0px;
+        margin: 0px;
+    }
+    .sidebar-right{
+        top: 0px;
+        margin-left: 0px;
+    }
+    .sidebar-right-control > ul.sr-control-item > li a{
+        margin: 0px;
+        padding-left: 20px;
+        padding-right: 20px;
+        max-width: 40px;
+        text-align: center;
+    }
+    /** end sub-sidebar**/
+
+    /* content */
+    .content{
+        margin-top: 0px;
+        margin-left: 0px;
+        border-left: 1px solid #CDCDCD;
+        margin-bottom: 0px;
+    }
+    /* end content */
+
+    /* box */
+    .box, .box-tab{
+        margin-bottom: 20px;
+    }
+    /* end box */
+    
+    /* login */
+    .signin-form, signup-form{
+        margin-top: 10px;
+    }
+    /* end login */
+    
+    /** message */
+    
+    .message-contact ul.contact-list li.contact-alt .status,
+    .message-contact ul.contact-list li.contact-alt .contact-item-object
+    {
+        display: none;
+    }
+    /** end message */
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+    /* content */
+    /** sidebar**/
+    .sidebar > li.active:after, 
+    .sidebar > li.active:before{
+        display: none;
+    }
+    /** panel-ext */
+    
+    .panel-ext, 
+    .panel-ext > .btn-group, 
+    .user-group,
+    .user-group > a:first-child{
+        display: block;
+        position: relative;
+    }
+    
+    .panel-ext > .btn-group, 
+    .user-group{
+        margin: 5px 10px 5px 0px;
+    }
+    
+    .panel-ext > .btn-group > .btn{
+        width: 90%;
+    }
+    
+    ul.dropdown-notification{
+        width: 160px;
+        min-width: 250px;
+    }
+    
+    .user-group .dropdown-user{
+        margin-left: auto;
+        min-width: 160px;
+        text-align: center;
+    }
+    
+    .user-group .dropdown-user img,.user-group .dropdown-user .description{
+        padding-left: 0px;
+    }
+    .user-group,
+    .user-group > a:first-child{
+        margin-right: -23px;
+    }
+    .user-group > a:first-child .btn{
+        
+        width: 90%;
+    }
+    /** end panel-ext */
+    
+    /** end sidebar**/
+    /* end content */
+    
+    /* message */
+    .message-control{
+        float: none;
+    }
+    .message-control .btn-group{
+        display: block;
+        margin: 0px;
+    }
+    .message-control .btn-group .btn{
+        display: block;
+        margin: 0px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        border-radius: 2px;
+    }
+    
+    .message-a{
+        height: auto;
+    }
+    .message-a > .message-contact{
+        display: block;
+        float: none;
+        height: 300px;
+        width: auto;
+    }
+    
+    .message-a > .message-body{
+        margin-top: 5px;
+        display: block;
+        width: auto;
+        float: none;
+        border: 1px solid #CDCDCD;
+        overflow: hidden;
+    }
+    /* end message */
+}

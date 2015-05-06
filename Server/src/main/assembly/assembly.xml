@@ -1,0 +1,34 @@
+<assembly>
+  <id>bin</id>
+  <formats>
+    <format>dir</format>
+  </formats>
+  <includeBaseDirectory>false</includeBaseDirectory>
+  <dependencySets>
+    <dependencySet>
+      <useProjectArtifact>true</useProjectArtifact>
+      <outputDirectory>libs</outputDirectory>
+    </dependencySet>
+  </dependencySets>
+  <fileSets>
+    <fileSet>
+      <outputDirectory>conf</outputDirectory>
+      <directory>src/main/resources</directory>
+      <includes>
+        <include>db.properties</include>
+        <include>mail.properties</include>
+        <include>system.properties</include>
+        <include>dubbo.properties</include>
+        <include>log4j.properties</include>
+        <include>credit.properties</include>
+        <include>ftl/**.ftl</include>
+      </includes>
+      <fileMode>0644</fileMode>
+    </fileSet>
+    <fileSet>
+      <directory>src/main/scripts</directory>
+      <outputDirectory>bin</outputDirectory>
+      <fileMode>0755</fileMode>
+    </fileSet>
+  </fileSets>
+</assembly>

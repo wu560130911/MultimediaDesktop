@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	default-lazy-init="true">
+
+	<description>Shiro安全配置</description>
+
+	<!-- <context:property-placeholder location="classpath:server.properties" 
+		/> -->
+
+	<!-- 会话ID生成器 -->
+	<bean id="sessionIdGenerator"
+		class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator" />
+
+	<!-- 会话Cookie模板 -->
+	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<constructor-arg value="sid" type="java.lang.String" />
+		<property name="httpOnly" value="true" />
+		<property name="maxAge" value="-1" />
+	</bean>
+
+	<bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<constructor-arg value="rememberMe" type="java.lang.String" />
+		<property name="httpOnly" value="true" />
+		<property name="maxAge" value="2592000" /><!-- 30天 -->
+	</bean>
+
+	<!-- rememberMe管理器 -->
+	<bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+		<!-- rememberMe cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度（128 256 512 位） -->
+		<property name="cipherKey"
+			value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}" />
+		<property name="cookie" ref="rememberMeCookie" />
+	</bean>
+
+	<!-- 会话DAO -->
+	<bean id="sessionDAO"
+		class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
+		<property name="activeSessionsCacheName" value="shiro-activeSessionCache" />
+		<property name="sessionIdGenerator" ref="sessionIdGenerator" />
+		<property name="cacheManager" ref="shiroMemCacheManager"></property>
+	</bean>
+	<!-- 会话验证调度器 -->
+	<bean id="sessionValidationScheduler"
+		class="org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler">
+		<property name="sessionValidationInterval" value="1800000" />
+		<property name="sessionManager" ref="sessionManager" />
+	</bean>
+	<!-- 会话管理器 -->
+	<bean id="sessionManager"
+		class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+		<property name="globalSessionTimeout" value="1800000" />
+		<property name="deleteInvalidSessions" value="true" />
+		<property name="sessionValidationSchedulerEnabled" value="true" />
+		<property name="sessionValidationScheduler" ref="sessionValidationScheduler" />
+		<property name="sessionDAO" ref="sessionDAO" />
+		<property name="sessionIdCookieEnabled" value="true" />
+		<property name="sessionIdCookie" ref="sessionIdCookie" />
+	</bean>
+
+	<!-- 安全管理器 -->
+	<!-- Shiro's main business-tier object for web-enabled applications -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="UserRealm" />
+		<property name="cacheManager" ref="shiroMemCacheManager" />
+		<property name="sessionManager" ref="sessionManager"></property>
+		<property name="rememberMeManager" ref="rememberMeManager" />
+	</bean>
+
+	<!-- 項目自定义的Realm -->
+	<bean id="UserRealm" class="com.wms.studio.realm.UserRealm">
+		<property name="userservice" ref="userService"></property>
+		<property name="cacheManager" ref="shiroMemCacheManager"></property>
+		<property name="authenticationTokenClass" value="com.wms.studio.token.SystemLoginToken"></property>
+	</bean>
+
+	<bean id="KickoutSessionControlFilter" class="com.wms.studio.filter.KickoutSessionControlFilter">
+		<property name="cacheManager" ref="shiroMemCacheManager"></property>
+		<property name="sessionManager" ref="sessionManager"></property>
+		<property name="maxSession" value="1"></property>
+		<property name="kickoutAfter" value="true" />
+	</bean>
+
+	<!-- <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor"> 
+		<property name="securityManager" ref="securityManager" /> </bean> -->
+
+	<!-- Shiro Filter -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/user/login" />
+		<property name="successUrl" value="/" /><!-- <property name="unauthorizedUrl" 
+			value="/unauthorized.jsp"/> -->
+		<property name="filters">
+			<map>
+				<entry key="authc">
+					<bean class="com.wms.studio.filter.CaptchaFormAuthenticationFilter">
+						<property name="loginIpService" ref="loginIpService"></property>
+					</bean>
+				</entry>
+				<entry key="forcelogout">
+					<bean class="com.wms.studio.filter.ForceLogoutFilter" />
+				</entry>
+				<entry key="kickout" value-ref="KickoutSessionControlFilter" />
+			</map>
+		</property>
+		<property name="filterChainDefinitions">
+			<value>
+				/favicon.ico = anon,kickout
+				/resources/**=anon,forcelogout
+				/user/remember=anon,kickout,forcelogout
+				/user/register=anon,kickout,forcelogout
+				/user/valid/**=anon,kickout,forcelogout
+				/user/findPassword=anon,kickout,forcelogout
+				/captchaImage.djpg=anon,forcelogout
+				/user/login=authc,kickout,forcelogout
+				/user/logout=logout
+				/data/json/**/admin.json=authc,roles[develop],forcelogout,kickout
+				/admin/**=authc,roles[admin],forcelogout,kickout
+				/**=authc,roles[user],forcelogout,kickout
+			</value>
+		</property>
+	</bean>
+
+	<!-- 用户授权信息Cache, 采用MemCache -->
+	<bean id="shiroMemCacheManager" class="com.wms.studio.cache.MemCacheManager">
+		<property name="cacheManager" ref="cacheManager"></property>
+	</bean>
+
+	<!-- <bean id="cacheManager" class="com.wms.studio.cache.lock.SyncLockCacheManagerImpl" init-method="initZooKeeper">
+		<property name="memcachedClient" ref="memcachedClient"></property>
+		<property name="timeout" value="${zookeeper.timeout}"></property>
+		<property name="zookeeperAddress" value="${zookeeper.address}"></property>
+	</bean> -->
+	
+	<bean id="cacheManager" class="com.wms.studio.cache.memcache.MemCacheManagerImpl">
+		<property name="memcachedClient" ref="memcachedClient"></property>
+	</bean>
+
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+	<!-- Enable Shiro Annotations for Spring-configured beans. Only run after -->
+	<!-- the lifecycleBeanProcessor has run: -->
+	<!-- AOP式方法级权限检查 -->
+	<bean
+		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+		depends-on="lifecycleBeanPostProcessor">
+		<property name="proxyTargetClass" value="true" />
+	</bean>
+
+	<!-- 相当于调用SecurityUtils.setSecurityManager(securityManager) -->
+	<bean
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="staticMethod"
+			value="org.apache.shiro.SecurityUtils.setSecurityManager" />
+		<property name="arguments" ref="securityManager" />
+	</bean>
+
+	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+		<property name="config">
+			<bean class="com.google.code.kaptcha.util.Config">
+				<constructor-arg>
+					<props>
+						<prop key="kaptcha.border">no</prop>
+						<prop key="kaptcha.border.color">105,179,90</prop>
+						<prop key="kaptcha.textproducer.font.color">red</prop>
+						<prop key="kaptcha.image.width">250</prop>
+						<prop key="kaptcha.textproducer.font.size">90</prop>
+						<prop key="kaptcha.image.height">90</prop>
+						<prop key="kaptcha.textproducer.char.length">4</prop>
+						<prop key="kaptcha.textproducer.char.space">4</prop>
+						<prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>
+					</props>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+</beans>

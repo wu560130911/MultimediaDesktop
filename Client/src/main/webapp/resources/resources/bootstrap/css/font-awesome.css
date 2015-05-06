@@ -1,0 +1,309 @@
+/*  Font Awesome
+    the iconic font designed for use with Twitter Bootstrap
+    -------------------------------------------------------
+    The full suite of pictographic icons, examples, and documentation
+    can be found at: http://fortawesome.github.com/Font-Awesome/
+
+    License
+    -------------------------------------------------------
+    The Font Awesome webfont, CSS, and LESS files are licensed under CC BY 3.0:
+    http://creativecommons.org/licenses/by/3.0/ A mention of
+    'Font Awesome - http://fortawesome.github.com/Font-Awesome' in human-readable
+    source code is considered acceptable attribution (most common on the web).
+    If human readable source code is not available to the end user, a mention in
+    an 'About' or 'Credits' screen is considered acceptable (most common in desktop
+    or mobile software).
+
+    Contact
+    -------------------------------------------------------
+    Email: dave@davegandy.com
+    Twitter: http://twitter.com/fortaweso_me
+    Work: http://lemonwi.se co-founder
+
+    */
+@font-face {
+  font-family: 'Aclonica';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Aclonica'), local('Aclonica-Regular'), url('../font/VVH16EjBQLZ2NYB8eVnrO_esZW2xOQ-xsNqO47m55DA.woff') format('woff');
+}
+@font-face {
+  font-family: "FontAwesome";
+  src: url('../font/fontawesome-webfont.eot');
+  src: url('../font/fontawesome-webfont.eot?#iefix') format('eot'), url('../font/fontawesome-webfont.woff') format('woff'), url('../font/fontawesome-webfont.ttf') format('truetype'), url('../font/fontawesome-webfont.svg#FontAwesome') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*  Font Awesome styles
+    ------------------------------------------------------- */
+[class^="icofont-"]:before, [class*=" icofont-"]:before {
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+}
+a [class^="icofont-"], a [class*=" icofont-"] {
+  display: inline-block;
+  text-decoration: inherit;
+}
+/* makes the font 33% larger relative to the icofont container */
+.icofont-large:before {
+  vertical-align: top;
+  font-size: 1.3333333333333333em;
+}
+.btn [class^="icofont-"], .btn [class*=" icofont-"] {
+  /* keeps button heights with and without icofonts the same */
+
+  line-height: .9em;
+}
+li [class^="icofont-"], li [class*=" icofont-"] {
+  display: inline-block;
+  width: 1.25em;
+  text-align: center;
+}
+li .icofont-large[class^="icofont-"], li .icofont-large[class*=" icofont-"] {
+  /* 1.5 increased font size for icofont-large * 1.25 width */
+
+  width: 1.875em;
+}
+li[class^="icofont-"], li[class*=" icofont-"] {
+  margin-left: 0;
+  list-style-type: none;
+}
+li[class^="icofont-"]:before, li[class*=" icofont-"]:before {
+  text-indent: -2em;
+  text-align: center;
+}
+li[class^="icofont-"].icofont-large:before, li[class*=" icofont-"].icofont-large:before {
+  text-indent: -1.3333333333333333em;
+}
+/*  Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen
+    readers do not read off random characters that represent icofonts */
+.icofont-glass:before                { content: "\f000"; }
+.icofont-music:before                { content: "\f001"; }
+.icofont-search:before               { content: "\f002"; }
+.icofont-envelope:before             { content: "\f003"; }
+.icofont-heart:before                { content: "\f004"; }
+.icofont-star:before                 { content: "\f005"; }
+.icofont-star-empty:before           { content: "\f006"; }
+.icofont-user:before                 { content: "\f007"; }
+.icofont-film:before                 { content: "\f008"; }
+.icofont-th-large:before             { content: "\f009"; }
+.icofont-th:before                   { content: "\f00a"; }
+.icofont-th-list:before              { content: "\f00b"; }
+.icofont-ok:before                   { content: "\f00c"; }
+.icofont-remove:before               { content: "\f00d"; }
+.icofont-zoom-in:before              { content: "\f00e"; }
+
+.icofont-zoom-out:before             { content: "\f010"; }
+.icofont-off:before                  { content: "\f011"; }
+.icofont-signal:before               { content: "\f012"; }
+.icofont-cog:before                  { content: "\f013"; }
+.icofont-trash:before                { content: "\f014"; }
+.icofont-home:before                 { content: "\f015"; }
+.icofont-file:before                 { content: "\f016"; }
+.icofont-time:before                 { content: "\f017"; }
+.icofont-road:before                 { content: "\f018"; }
+.icofont-download-alt:before         { content: "\f019"; }
+.icofont-download:before             { content: "\f01a"; }
+.icofont-upload:before               { content: "\f01b"; }
+.icofont-inbox:before                { content: "\f01c"; }
+.icofont-play-circle:before          { content: "\f01d"; }
+.icofont-repeat:before               { content: "\f01e"; }
+
+/* \f020 doesn't work in Safari. all shifted one down */
+.icofont-refresh:before              { content: "\f021"; }
+.icofont-list-alt:before             { content: "\f022"; }
+.icofont-lock:before                 { content: "\f023"; }
+.icofont-flag:before                 { content: "\f024"; }
+.icofont-headphones:before           { content: "\f025"; }
+.icofont-volume-off:before           { content: "\f026"; }
+.icofont-volume-down:before          { content: "\f027"; }
+.icofont-volume-up:before            { content: "\f028"; }
+.icofont-qrcode:before               { content: "\f029"; }
+.icofont-barcode:before              { content: "\f02a"; }
+.icofont-tag:before                  { content: "\f02b"; }
+.icofont-tags:before                 { content: "\f02c"; }
+.icofont-book:before                 { content: "\f02d"; }
+.icofont-bookmark:before             { content: "\f02e"; }
+.icofont-print:before                { content: "\f02f"; }
+
+.icofont-camera:before               { content: "\f030"; }
+.icofont-font:before                 { content: "\f031"; }
+.icofont-bold:before                 { content: "\f032"; }
+.icofont-italic:before               { content: "\f033"; }
+.icofont-text-height:before          { content: "\f034"; }
+.icofont-text-width:before           { content: "\f035"; }
+.icofont-align-left:before           { content: "\f036"; }
+.icofont-align-center:before         { content: "\f037"; }
+.icofont-align-right:before          { content: "\f038"; }
+.icofont-align-justify:before        { content: "\f039"; }
+.icofont-list:before                 { content: "\f03a"; }
+.icofont-indent-left:before          { content: "\f03b"; }
+.icofont-indent-right:before         { content: "\f03c"; }
+.icofont-facetime-video:before       { content: "\f03d"; }
+.icofont-picture:before              { content: "\f03e"; }
+
+.icofont-pencil:before               { content: "\f040"; }
+.icofont-map-marker:before           { content: "\f041"; }
+.icofont-adjust:before               { content: "\f042"; }
+.icofont-tint:before                 { content: "\f043"; }
+.icofont-edit:before                 { content: "\f044"; }
+.icofont-share:before                { content: "\f045"; }
+.icofont-check:before                { content: "\f046"; }
+.icofont-move:before                 { content: "\f047"; }
+.icofont-step-backward:before        { content: "\f048"; }
+.icofont-fast-backward:before        { content: "\f049"; }
+.icofont-backward:before             { content: "\f04a"; }
+.icofont-play:before                 { content: "\f04b"; }
+.icofont-pause:before                { content: "\f04c"; }
+.icofont-stop:before                 { content: "\f04d"; }
+.icofont-forward:before              { content: "\f04e"; }
+
+.icofont-fast-forward:before         { content: "\f050"; }
+.icofont-step-forward:before         { content: "\f051"; }
+.icofont-eject:before                { content: "\f052"; }
+.icofont-chevron-left:before         { content: "\f053"; }
+.icofont-chevron-right:before        { content: "\f054"; }
+.icofont-plus-sign:before            { content: "\f055"; }
+.icofont-minus-sign:before           { content: "\f056"; }
+.icofont-remove-sign:before          { content: "\f057"; }
+.icofont-ok-sign:before              { content: "\f058"; }
+.icofont-question-sign:before        { content: "\f059"; }
+.icofont-info-sign:before            { content: "\f05a"; }
+.icofont-screenshot:before           { content: "\f05b"; }
+.icofont-remove-circle:before        { content: "\f05c"; }
+.icofont-ok-circle:before            { content: "\f05d"; }
+.icofont-ban-circle:before           { content: "\f05e"; }
+
+.icofont-arrow-left:before           { content: "\f060"; }
+.icofont-arrow-right:before          { content: "\f061"; }
+.icofont-arrow-up:before             { content: "\f062"; }
+.icofont-arrow-down:before           { content: "\f063"; }
+.icofont-share-alt:before            { content: "\f064"; }
+.icofont-resize-full:before          { content: "\f065"; }
+.icofont-resize-small:before         { content: "\f066"; }
+.icofont-plus:before                 { content: "\f067"; }
+.icofont-minus:before                { content: "\f068"; }
+.icofont-asterisk:before             { content: "\f069"; }
+.icofont-exclamation-sign:before     { content: "\f06a"; }
+.icofont-gift:before                 { content: "\f06b"; }
+.icofont-leaf:before                 { content: "\f06c"; }
+.icofont-fire:before                 { content: "\f06d"; }
+.icofont-eye-open:before             { content: "\f06e"; }
+
+.icofont-eye-close:before            { content: "\f070"; }
+.icofont-warning-sign:before         { content: "\f071"; }
+.icofont-plane:before                { content: "\f072"; }
+.icofont-calendar:before             { content: "\f073"; }
+.icofont-random:before               { content: "\f074"; }
+.icofont-comment:before              { content: "\f075"; }
+.icofont-magnet:before               { content: "\f076"; }
+.icofont-chevron-up:before           { content: "\f077"; }
+.icofont-chevron-down:before         { content: "\f078"; }
+.icofont-retweet:before              { content: "\f079"; }
+.icofont-shopping-cart:before        { content: "\f07a"; }
+.icofont-folder-close:before         { content: "\f07b"; }
+.icofont-folder-open:before          { content: "\f07c"; }
+.icofont-resize-vertical:before      { content: "\f07d"; }
+.icofont-resize-horizontal:before    { content: "\f07e"; }
+
+.icofont-bar-chart:before            { content: "\f080"; }
+.icofont-twitter-sign:before         { content: "\f081"; }
+.icofont-facebook-sign:before        { content: "\f082"; }
+.icofont-camera-retro:before         { content: "\f083"; }
+.icofont-key:before                  { content: "\f084"; }
+.icofont-cogs:before                 { content: "\f085"; }
+.icofont-comments:before             { content: "\f086"; }
+.icofont-thumbs-up:before            { content: "\f087"; }
+.icofont-thumbs-down:before          { content: "\f088"; }
+.icofont-star-half:before            { content: "\f089"; }
+.icofont-heart-empty:before          { content: "\f08a"; }
+.icofont-signout:before              { content: "\f08b"; }
+.icofont-linkedin-sign:before        { content: "\f08c"; }
+.icofont-pushpin:before              { content: "\f08d"; }
+.icofont-external-link:before        { content: "\f08e"; }
+
+.icofont-signin:before               { content: "\f090"; }
+.icofont-trophy:before               { content: "\f091"; }
+.icofont-github-sign:before          { content: "\f092"; }
+.icofont-upload-alt:before           { content: "\f093"; }
+.icofont-lemon:before                { content: "\f094"; }
+.icofont-phone:before                { content: "\f095"; }
+.icofont-check-empty:before          { content: "\f096"; }
+.icofont-bookmark-empty:before       { content: "\f097"; }
+.icofont-phone-sign:before           { content: "\f098"; }
+.icofont-twitter:before              { content: "\f099"; }
+.icofont-facebook:before             { content: "\f09a"; }
+.icofont-github:before               { content: "\f09b"; }
+.icofont-unlock:before               { content: "\f09c"; }
+.icofont-credit-card:before          { content: "\f09d"; }
+.icofont-rss:before                  { content: "\f09e"; }
+
+.icofont-hdd:before                  { content: "\f0a0"; }
+.icofont-bullhorn:before             { content: "\f0a1"; }
+.icofont-bell:before                 { content: "\f0a2"; }
+.icofont-certificate:before          { content: "\f0a3"; }
+.icofont-hand-right:before           { content: "\f0a4"; }
+.icofont-hand-left:before            { content: "\f0a5"; }
+.icofont-hand-up:before              { content: "\f0a6"; }
+.icofont-hand-down:before            { content: "\f0a7"; }
+.icofont-circle-arrow-left:before    { content: "\f0a8"; }
+.icofont-circle-arrow-right:before   { content: "\f0a9"; }
+.icofont-circle-arrow-up:before      { content: "\f0aa"; }
+.icofont-circle-arrow-down:before    { content: "\f0ab"; }
+.icofont-globe:before                { content: "\f0ac"; }
+.icofont-wrench:before               { content: "\f0ad"; }
+.icofont-tasks:before                { content: "\f0ae"; }
+
+.icofont-filter:before               { content: "\f0b0"; }
+.icofont-briefcase:before            { content: "\f0b1"; }
+.icofont-fullscreen:before           { content: "\f0b2"; }
+
+.icofont-group:before                { content: "\f0c0"; }
+.icofont-link:before                 { content: "\f0c1"; }
+.icofont-cloud:before                { content: "\f0c2"; }
+.icofont-beaker:before               { content: "\f0c3"; }
+.icofont-cut:before                  { content: "\f0c4"; }
+.icofont-copy:before                 { content: "\f0c5"; }
+.icofont-paper-clip:before           { content: "\f0c6"; }
+.icofont-save:before                 { content: "\f0c7"; }
+.icofont-sign-blank:before           { content: "\f0c8"; }
+.icofont-reorder:before              { content: "\f0c9"; }
+.icofont-list-ul:before              { content: "\f0ca"; }
+.icofont-list-ol:before              { content: "\f0cb"; }
+.icofont-strikethrough:before        { content: "\f0cc"; }
+.icofont-underline:before            { content: "\f0cd"; }
+.icofont-table:before                { content: "\f0ce"; }
+
+.icofont-magic:before                { content: "\f0d0"; }
+.icofont-truck:before                { content: "\f0d1"; }
+.icofont-pinterest:before            { content: "\f0d2"; }
+.icofont-pinterest-sign:before       { content: "\f0d3"; }
+.icofont-google-plus-sign:before     { content: "\f0d4"; }
+.icofont-google-plus:before          { content: "\f0d5"; }
+.icofont-money:before                { content: "\f0d6"; }
+.icofont-caret-down:before           { content: "\f0d7"; }
+.icofont-caret-up:before             { content: "\f0d8"; }
+.icofont-caret-left:before           { content: "\f0d9"; }
+.icofont-caret-right:before          { content: "\f0da"; }
+.icofont-columns:before              { content: "\f0db"; }
+.icofont-sort:before                 { content: "\f0dc"; }
+.icofont-sort-down:before            { content: "\f0dd"; }
+.icofont-sort-up:before              { content: "\f0de"; }
+
+.icofont-envelope-alt:before         { content: "\f0e0"; }
+.icofont-linkedin:before             { content: "\f0e1"; }
+.icofont-undo:before                 { content: "\f0e2"; }
+.icofont-legal:before                { content: "\f0e3"; }
+.icofont-dashboard:before            { content: "\f0e4"; }
+.icofont-comment-alt:before          { content: "\f0e5"; }
+.icofont-comments-alt:before         { content: "\f0e6"; }
+.icofont-bolt:before                 { content: "\f0e7"; }
+.icofont-sitemap:before              { content: "\f0e8"; }
+.icofont-umbrella:before             { content: "\f0e9"; }
+.icofont-paste:before                { content: "\f0ea"; }
+
+.icofont-user-md:before              { content: "\f200"; }

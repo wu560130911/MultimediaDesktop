@@ -1,0 +1,488 @@
+/*!
+* Ext JS Library 4.0
+* Copyright(c) 2006-2011 Sencha Inc.
+* licensing@sencha.com
+* http://www.sencha.com/license
+*/
+
+#poweredby {
+    position: absolute;
+    bottom: 40px;
+    right: 20px;
+    z-index: 15000;
+
+    /* IE 5-7 */
+    filter: alpha(opacity=70);
+    /* Netscape */
+    -moz-opacity: 0.7;
+    /* Safari 1.x */
+    -khtml-opacity: 0.7;
+    /* Good browsers */
+    opacity: 0.7;
+}
+
+#poweredby div {
+    position: relative;
+    width: 150px;
+    height: 25px;
+    background-image: url(../images/powered-by-ext-js.png);
+    background-repeat: no-repeat;
+}
+
+/* The simple background image PNG does not work in IE6-8, but does in IE9 */
+.x-ie6 #poweredby div,
+.x-ie7 #poweredby div,
+.x-ie8 #poweredby div {
+    background-image: none;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/powered-by-ext-js.png', sizingMethod='scale');
+}
+
+/*----------------------------------------------------
+    Start Button
+*/
+
+.ux-start-button-icon {
+    background-image: url(../images/start_menu.png) !important;
+    background-color: transparent;
+}
+
+.ux-start-button .x-btn-arrow {
+    background-image: none;
+}
+
+.ux-start-button .x-btn-arrow-right {
+    padding-left: 10px;
+}
+
+.ux-taskbar {
+    padding-left: 4px !important;
+    z-index: 8999;
+}
+
+/*
+    Start Button (Black)
+*/
+
+.ux-desktop-black .ux-start-button {
+    height: 28px;
+    padding: 0px;
+    display: block;
+}
+
+.ux-desktop-black .ux-start-button em {
+    margin-top: 5px;
+}
+
+.ux-desktop-black .ux-start-button .x-btn-inner {
+    color: black;
+    font-size:11px;
+    font-weight: bold;
+}
+
+.ux-desktop-black .ux-start-button {
+    background-image: -moz-linear-gradient(center top , #E4F3FF, #D9EDFF 48%, #C2D8F2 52%, #C6DCF6);
+    border-radius: 8px 8px 8px 8px;
+    border-color: #81A4D0;
+}
+
+/*----------------------------------------------------
+    Start Menu
+*/
+
+.ux-start-menu-toolbar .x-btn-inner {
+    text-align: left;
+}
+
+.ux-start-menu-toolbar {
+    padding: 4px !important;
+}
+
+/*----------------------------------------------------
+    TaskBar
+*/
+
+.ux-taskbar .x-toolbar {
+    background: transparent none;
+    border-color: transparent;
+}
+.ux-toolbar-splitter {
+	cursor: move;
+}
+.ux-desktop-windowbar .x-btn-inner,
+.x-nbr .ux-desktop-windowbar .x-btn-icon-text-left button {
+    text-align: left !important;
+}
+
+.ux-taskbar .x-toolbar {
+    height: 30px;
+}
+
+.ux-taskbar {
+    height: 30px;
+    padding: 0;
+}
+
+.x-toolbar .x-toolbar {
+    padding: 0;
+}
+
+/*
+    TaskBar (Black)
+*/
+
+.ux-desktop-black .ux-taskbar {
+    background: transparent url('../images/taskbar/black/taskbar-start-panel-bg.gif') repeat-x left top;
+    border-color: transparent;
+    /*height: 30px;*/
+}
+
+.ux-desktop-black .ux-taskbar .x-splitter {
+    background: transparent url(../images/taskbar/black/taskbar-split-h.gif) no-repeat scroll 0 -2px;
+}
+
+.ux-desktop-black .ux-taskbar .x-toolbar-text {
+    color: white !important;
+}
+
+.ux-desktop-black .ux-taskbar .x-btn-default-toolbar-small-over {
+    background-color: yellow;
+}
+
+.ux-desktop-black .ux-taskbar .x-btn-inner {
+    color: white;
+}
+
+.ux-desktop-black .ux-taskbar .x-btn-pressed .x-btn-inner, .ux-taskbar .x-btn-over .x-btn-inner {
+    color: black;
+}
+
+/*----------------------------------------------------
+    Tray Clock
+*/
+
+.ux-desktop-trayclock {
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/*----------------------------------------------------
+    Desktop DataView
+*/
+/**����ɫ��*/
+.ux-wallpaper {
+    background-color: #3d71b8;
+}
+
+.ux-wallpaper-tiled {
+    background-repeat: repeat;
+}
+
+.ux-desktop-shortcut-column {
+	float: left;
+}
+
+/*��ݷ�ʽ*/
+.ux-desktop-shortcut {
+	cursor: pointer;
+	text-align: center;
+	margin: 10px;
+	width: 70px;
+	height: 70px;
+	overflow: hidden;
+}
+
+.ux-desktop-shortcut-over {
+	cursor: pointer;
+	text-align: center;
+	overflow: hidden;
+	background-image:
+		url("../images/appbutton_mouseover_bg.png");
+}
+
+.ux-desktop-shortcut-selected {
+	background: #b0f6c0;
+	cursor: pointer;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+/*����ͼ��*/
+.ux-desktop-shortcut-icon {
+    height: 48px;
+    margin: 5px auto 1px;
+    overflow: hidden;
+    position: relative;
+    width: 48px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+/*��������*/
+
+.ux-desktop-shortcut-text {
+	font: normal 11px tahoma, arial, verdana, sans-serif;
+	background: rgba(255, 255, 255, 0.80);
+	color: white;
+	cursor: pointer;
+	height: 20px;
+	overflow: hidden;
+	text-align: center;
+	color: #333;
+	padding: 0px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	text-shadow: 1px 1px 2px #FFF;
+	-webkit-box-shadow: 0px 1px 5px 1.5px rgba(0, 0, 0, 0.25), 0px 20px 70px 8px rgba(0, 0, 0, 0.05); 
+	-moz-box-shadow:    0px 1px 5px 1.5px rgba(0, 0, 0, 0.25), 0px 20px 70px 8px rgba(0, 0, 0, 0.05);
+	-ms-box-shadow:     0px 1px 5px 1.5px rgba(0, 0, 0, 0.25), 0px 20px 70px 8px rgba(0, 0, 0, 0.05);  
+	-o-box-shadow:      0px 1px 5px 1.5px rgba(0, 0, 0, 0.25), 0px 20px 70px 8px rgba(0, 0, 0, 0.05);
+	box-shadow:         0px 1px 5px 1.5px rgba(0, 0, 0, 0.25), 0px 20px 70px 8px rgba(0, 0, 0, 0.05);
+}
+
+.ux-desktop-shortcut-text-inner {
+	overflow: hidden;
+	vertical-align:middle;
+	text-overflow: ellipsis;
+	white-space: nowrap !important;
+	font-size: 10px;
+}
+
+.x-view-over .ux-desktop-shortcut-text {
+    text-decoration: underline;
+}
+.x-item-selected{
+	background: #b0f6c0;
+}
+
+
+/*----------------------------------------------------
+    Various icon classes
+*/
+/*ukey����*/
+.ukeygl-shortcut{
+    background-image: url(../images/ico/xwxbglxt48.png);
+}
+.ukeygl{
+    background-image: url(../images/ico/xwxbglxt48.png);
+}
+.funico
+{background-image: url(../images/images/fun.png);
+}
+.xwxbgl-shortcut{
+    background-image: url(../images/ico/xwxbglxt48.png);
+}
+.xwxbgl{
+    background-image: url(../images/ico/xwxbglxt16.png);
+}
+.accordion-shortcut {
+    background-image: url(../images/im48x48.png);
+}
+
+.cpu-shortcut {
+    background-image: url(../images/statusLarge.png);
+}
+
+.grid-shortcut {
+    background-image: url(../images/grid48x48.png);
+}
+
+.notepad-shortcut {
+    background-image: url(../images/notepadLarge.png);
+    width: 46px;
+    height: 46px;
+}
+
+.x-ie6 .accordion-shortcut {
+    background-image: none;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/im48x48.png', sizingMethod='scale');
+}
+
+.x-ie6 .cpu-shortcut {
+    background-image: none;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/statusLarge.png', sizingMethod='scale');
+}
+
+.x-ie6 .grid-shortcut {
+    background-image: none;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/grid48x48.png', sizingMethod='scale');
+}
+
+.x-ie6 .notepad-shortcut {
+    background-image: none;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/notepadLarge.png', sizingMethod='scale');
+}
+
+.bogus {
+    background-image: url( ../images/bogus.png ) !important;
+}
+
+.game {
+    background-image: url( ../images/game.png ) !important;
+}
+
+.game_item {
+    background-image: url( ../images/game_item.png ) !important;
+}
+
+.notepad {
+    background-image: url( ../images/bogus.png ) !important;
+}
+.lock{
+    background-image: url( ../images/lock_mini.png ) !important;
+}
+.logout {
+    background-image: url( ../images/logout.gif ) !important;
+}
+
+.settings {
+    background-image: url( ../images/system_edit.png ) !important;
+}
+
+
+.icon-grid {
+    background-image:url( ../images/grid.png ) !important;
+}
+.add {
+    background-image:url(../images/add.gif) !important;
+}
+.option {
+    background-image:url(../images/plugin.gif) !important;
+}
+.remove {
+    background-image:url(../images/delete.gif) !important;
+}
+.save {
+    background-image:url(../../shared/icons/save.gif) !important;
+}
+.accordion {
+    background-image:url(../images/accordian.gif) !important;
+}
+.tabs {
+    background-image:url(../images/tabs.gif) !important;
+}
+
+/*----------------------------------------------------
+    IM window icons
+*/
+
+.user {
+    background-image:url( ../images/icon_system.png ) !important;
+}
+
+.user-add {
+    background-image:url(../images/user_add.gif) !important;
+}
+
+.user-delete {
+    background-image:url(../images/user_delete.gif) !important;
+}
+
+.connect {
+    background-image:url(../images/connect.gif) !important;
+}
+
+.user-girl {
+    background-image:url(../images/user_female.gif) !important;
+}
+
+.user-kid {
+    background-image:url(../images/user_green.gif) !important;
+}
+
+.user-suit {
+    background-image:url(../images/user_suit.gif) !important;
+}
+
+#ip{
+	text-align: right;
+}
+.msg .x-box-mc {
+    font-size:14px;
+}
+#msg-div {
+    position:absolute;
+    right:10px;
+    top:10px;
+    width:200px;
+    z-index:20000;
+}
+#copy-right{
+	position:absolute;
+	left: 42%;
+	top:35%;
+	width:240px;
+	height:150px;
+	z-index:2;
+}
+#msg-div .msg {
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    background: #F6F6F6;
+    border: 2px solid #ccc;
+    margin-top: 2px;
+    padding: 10px 15px;
+    color: #555;
+}
+#msg-div .msg h3 {
+    margin: 0 0 8px;
+    font-weight: bold;
+    font-size: 15px;
+}
+#msg-div .msg p {
+    margin: 0;
+}
+
+
+.ux-theme-item-over {
+	border: 1px solid #dddddd;
+	background: #efefef url(../images/item_over.gif)
+		repeat-x left top;
+	padding: 4px;
+}
+
+.ux-theme-item-selected {
+	background: #eff5fb
+		url(../images/item_selected.gif) repeat-y right
+		bottom;
+	border: 1px solid #99bbe8;
+	padding: 4px;
+}
+
+.ux-theme-item-selected .ux-backgroud-item {
+	background: transparent;
+}
+
+.ux-theme-item {
+	background: #dddddd;
+	padding: 3px;
+	padding-bottom: 3px;
+}
+
+.ux-theme-item img {
+	height: 110px;
+	width: 186px;
+}
+
+.ux-theme-item-wrap {
+	border: 1px solid #dddde8;
+	float: left;
+	margin: 4px;
+	margin-right: 0;
+	padding: 5px;
+}
+
+.ux-theme-item-wrap span {
+	display: block;
+	overflow: hidden;
+	text-align: center;
+	white-space: nowrap !important;
+	text-overflow: ellipsis;
+}
+.x-message-box .ext-mb-download {
+	background: url("../images/download.gif")
+		no-repeat scroll 6px 0px transparent;
+	font-size: 12px;
+	height: 52px !important;
+}

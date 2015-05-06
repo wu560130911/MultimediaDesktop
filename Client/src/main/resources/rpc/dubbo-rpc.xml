@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	default-lazy-init="true"
+	xsi:schemaLocation="http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<dubbo:application name="${dubbo.application.name}"
+		owner="${dubbo.application.owner}" version="${dubbo.application.version}" />
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry address="zookeeper://zookeeper.wms.studio:2181" />
+
+	<dubbo:monitor protocol="registry"></dubbo:monitor>
+
+	<dubbo:protocol name="dubbo" host="${dubbo.protocol.host}"
+		port="${dubbo.protocol.port}" server="netty" />
+
+	<dubbo:reference interface="com.wms.studio.api.service.UserService"
+		id="userService" timeout="50000"></dubbo:reference>
+
+	<dubbo:reference interface="com.wms.studio.api.service.LoginIpService"
+		id="loginIpService" timeout="50000">
+		<dubbo:method name="addLoginIp" async="true" return="false"></dubbo:method>
+	</dubbo:reference>
+
+	<dubbo:reference interface="com.wms.studio.api.service.MailService"
+		id="mailService" timeout="50000"></dubbo:reference>
+
+	<dubbo:reference interface="com.wms.studio.api.service.WallpaperService"
+		id="wallpaperService" timeout="50000"></dubbo:reference>
+
+	<dubbo:reference interface="com.wms.studio.api.service.ApplicationService"
+		id="applicationService" timeout="50000"></dubbo:reference>
+
+	<dubbo:reference interface="com.wms.studio.api.service.UserApplicationService"
+		id="userApplicationService" timeout="50000"></dubbo:reference>
+
+	<dubbo:reference interface="com.wms.studio.api.service.MovieService"
+		id="movieService" timeout="50000"></dubbo:reference>
+
+	<dubbo:reference interface="com.wms.studio.api.service.MusicService"
+		id="musicService" timeout="50000"></dubbo:reference>
+
+	<dubbo:reference interface="com.wms.studio.api.service.MusicPlaylistService"
+		id="musicPlaylistService" timeout="50000"></dubbo:reference>
+
+	<dubbo:reference interface="com.wms.studio.api.service.MoviePlaylistService"
+		id="moviePlaylistService" timeout="50000"></dubbo:reference>
+
+	<dubbo:reference interface="com.wms.studio.api.service.BuiltInApplicationService"
+		id="builtInApplicationService" timeout="50000"></dubbo:reference>
+
+	<dubbo:reference interface="com.wms.studio.api.service.CreditService"
+		id="creditService" timeout="50000"></dubbo:reference>
+
+	<dubbo:reference interface="com.wms.studio.api.service.SystemLogService"
+		id="systemLogService" timeout="50000"></dubbo:reference>
+</beans>
