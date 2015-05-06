@@ -3,7 +3,6 @@
 
 作者：吴梦升
 邮箱：560130911@163.com
-交流群：285416295
 
 具体的系统设计和功能文档将在后期完善。。。。。。。。。。。。
 
@@ -45,9 +44,9 @@ Zookeeper，MemCache，Mysql（默认，可选择其他的），Tomcat（默认�
 请参见本人博文，[分布式桌面多媒体共享平台](http://my.oschina.net/WMSstudio/blog/408026)。<br>
 <a name="h6"/>
 ## 系统功能
-如图所示。<br>
+系统采用shiro作为安全框架，目前只有三个角色的用户，使用Memcache作为分布式会话缓存（不依赖容器），将用户权限等信息存放在缓存中，如图所示。<br>
 ![](https://github.com/wu560130911/MultimediaDesktop/blob/master/deploy/pictures/%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E5%9B%BE.png)<br>
-
+![](https://github.com/wu560130911/MultimediaDesktop/blob/master/deploy/pictures/Handler.png)<br>
 <a name="h8"/>
 ## 系统功能截图
 ![](https://github.com/wu560130911/MultimediaDesktop/blob/master/deploy/pictures/1.png)<br>
