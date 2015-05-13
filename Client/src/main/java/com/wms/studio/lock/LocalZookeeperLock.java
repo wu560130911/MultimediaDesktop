@@ -14,6 +14,8 @@
 
 package com.wms.studio.lock;
 
+import static com.wms.studio.utils.AddressUtil.formatPath;
+
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -21,30 +23,28 @@ import org.apache.log4j.Logger;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.recipes.lock.WriteLock;
 
-import static com.wms.studio.utils.AddressUtil.formatPath;
-
 /**
  * @author WMS
  * 
  */
 public class LocalZookeeperLock {
 
-	private static final Logger log = Logger
+	private static final Logger LOG = Logger
 			.getLogger(LocalZookeeperLock.class);
-	private static final ConcurrentHashMap<String, ReentrantLock> jvmLocks = new ConcurrentHashMap<String, ReentrantLock>();
+	private static final ConcurrentHashMap<String, ReentrantLock> JVM_LOCAL_LOCKS = new ConcurrentHashMap<String, ReentrantLock>();
 	private ReentrantLock jvmLock;
 	private WriteLock lock;
 	private String path;
-	private static final int reCount = 3;
-	private static final int sleepTime = 500;
+	private static final int REPEAT_COUNT = 3;
+	private static final int SLEEP_TIME = 500;
 
 	public LocalZookeeperLock(ZooKeeper zk, String root, String lockPath) {
 		path = formatPath(root, lockPath);
 		// 防止出现冲突，这儿使用锁路径作为key
-		jvmLock = jvmLocks.get(path);
+		jvmLock = JVM_LOCAL_LOCKS.get(path);
 		if (jvmLock == null) {
 			jvmLock = new ReentrantLock();
-			jvmLocks.put(path, jvmLock);
+			JVM_LOCAL_LOCKS.put(path, jvmLock);
 		}
 		lock = new WriteLock(zk, path, null);
 	}
@@ -54,19 +54,19 @@ public class LocalZookeeperLock {
 		try {
 			// 不能设置成只有获取到锁了，才让它停止，这样会生成很大的流量和耗费很多资源
 			// 原有实现机制中，包含了重试获取锁的功能，所以这儿只进行一次或者有限次数，如果还是获取不到可以报FATAL，提示可能存在死锁问题
-			for (int i = 1; i <= reCount; i++) {
+			for (int i = 1; i <= REPEAT_COUNT; i++) {
 				if (lock.lock()) {
 					return;
 				}
-				Thread.sleep(sleepTime * i);
+				Thread.sleep(SLEEP_TIME * i);
 			}
-			log.fatal("获取锁" + path + "失败，请检查是否存在死锁问题.");
+			LOG.fatal("获取锁" + path + "失败，请检查是否存在死锁问题.");
 			throw new InterruptedException();
-		} catch (Throwable e) {
+		} catch (Exception e) {
 			// here need catch Throwable, avoid throw
 			// runtimeException
 			// cause the jvmLock unrealsed
-			log.error("accquire global lock " + path + " fail.", e);
+			LOG.error("accquire global lock " + path + " fail.", e);
 			jvmLock.unlock();
 			throw new InterruptedException();
 		}
@@ -82,6 +82,6 @@ public class LocalZookeeperLock {
 	}
 
 	public static boolean isContainJvmLock(String name) {
-		return jvmLocks.containsKey(name);
+		return JVM_LOCAL_LOCKS.containsKey(name);
 	}
 }

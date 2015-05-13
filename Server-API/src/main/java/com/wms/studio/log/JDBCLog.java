@@ -38,7 +38,7 @@ public class JDBCLog extends org.apache.log4j.AppenderSkeleton implements
 
 	protected String table = "tb_system_log";
 
-	protected String machineId = "127.0.0.1";
+	protected String machineId = "127.0.0.1@TYPE";
 
 	protected String databasePassword = "mypassword";
 
@@ -206,10 +206,6 @@ public class JDBCLog extends org.apache.log4j.AppenderSkeleton implements
 		buffer.removeAll(removes);
 
 		removes.clear();
-	}
-
-	public void finalize() {
-		close();
 	}
 
 	public boolean requiresLayout() {

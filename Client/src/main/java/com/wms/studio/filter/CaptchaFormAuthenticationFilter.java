@@ -107,7 +107,7 @@ public class CaptchaFormAuthenticationFilter extends FormAuthenticationFilter {
 			out.flush();
 			out.close();
 		} catch (IOException e1) {
-			e1.printStackTrace();
+			log.fatal("异步跳转异常", e);
 		}
 		return false;
 	}

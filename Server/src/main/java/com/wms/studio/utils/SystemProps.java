@@ -18,28 +18,36 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 /**
  * 本类已经不使用，使用spring进行注入
+ * 
  * @author WMS
  * 
  */
 public class SystemProps {
 
-	public static final String SERVER_FILE = "server.properties";
+	private static final Logger log = Logger.getLogger(SystemProps.class);
 
-	public static Properties props = null;
+	private static final String SERVER_FILE = "server.properties";
 
-	public static final String TIME_FORMAT="yyyy-MM-dd HH:mm:ss";
-	
-	public static SimpleDateFormat sdf = new SimpleDateFormat(TIME_FORMAT);
-	
+	private static Properties props = null;
+
+	public static final String TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
+	private static SimpleDateFormat sdf = new SimpleDateFormat(TIME_FORMAT);
+
+	private SystemProps() {
+
+	}
+
 	public static boolean InitProps() {
 		try {
 			props = PropertiesLoaderUtils.loadAllProperties(SERVER_FILE);
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.fatal("读取配置文件失败", e);
 			return false;
 		}
 		return props != null;
@@ -52,9 +60,9 @@ public class SystemProps {
 	public static String getValue(String key) {
 		return getValue(key, null);
 	}
-	
-	public static String getDateFormatString(long times){
+
+	public static String getDateFormatString(long times) {
 		return sdf.format(times);
 	}
-	
+
 }
