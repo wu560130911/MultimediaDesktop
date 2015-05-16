@@ -565,7 +565,6 @@
 		<module>Server-API</module>
 		<module>Server</module>
 		<module>Client</module>
-		<module>UserManager</module>
 	</modules>
 
 	<reporting>
