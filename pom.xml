@@ -49,7 +49,7 @@
 		<slf4j.version>1.7.5</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
 		<hibernate-commons-annotations.version>4.0.4.Final</hibernate-commons-annotations.version>
-		<ehcache-core.version>2.6.9</ehcache-core.version>
+		<ehcache-core.version>2.6.10</ehcache-core.version>
 		<mail-version>1.5.1</mail-version>
 		<commons-io.version>2.4</commons-io.version>
 		<fastjson.version>1.2.1</fastjson.version>
@@ -67,6 +67,8 @@
 		<commons-httpclient.version>3.1</commons-httpclient.version>
 		<kaptcha.version>2.3</kaptcha.version>
 		<javax.el.version>2.2.4</javax.el.version>
+		<jgroups.version>3.6.2.Final</jgroups.version>
+		<ehcache-jgroupsreplication.version>1.7</ehcache-jgroupsreplication.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<!-- for maven compiler plugin -->
@@ -388,6 +390,17 @@
 				<artifactId>ehcache-core</artifactId>
 				<version>${ehcache-core.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>net.sf.ehcache</groupId>
+				<artifactId>ehcache-jgroupsreplication</artifactId>
+				<version>${ehcache-jgroupsreplication.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jgroups</groupId>
+				<artifactId>jgroups</artifactId>
+				<version>${jgroups.version}</version>
+			</dependency>
 			<!-- CACHE end -->
 
 			<!-- 数据库驱�?�?�� -->
@@ -552,6 +565,7 @@
 		<module>Server-API</module>
 		<module>Server</module>
 		<module>Client</module>
+		<module>UserManager</module>
 	</modules>
 
 	<reporting>

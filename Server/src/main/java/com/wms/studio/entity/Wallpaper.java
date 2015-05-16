@@ -31,6 +31,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.wms.studio.api.constant.WallpaperEnum;
 
 /**
@@ -40,6 +43,7 @@ import com.wms.studio.api.constant.WallpaperEnum;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "tb_wallpaper")
+@Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Wallpaper implements Serializable {
 
 	@Id

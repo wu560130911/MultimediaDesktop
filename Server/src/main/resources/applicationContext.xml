@@ -83,8 +83,8 @@
 		<property name="testWhileIdle" value="false" />
 		<property name="testOnBorrow" value="false" />
 		<property name="testOnReturn" value="false" />
-		<!-- 定期把监控数据输出到日志中 -->
-		<property name="timeBetweenLogStatsMillis" value="300000" />
+		<!-- 定期把监控数据输出到日志中  30分钟-->
+		<property name="timeBetweenLogStatsMillis" value="1800000" />
 
 		<!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
 		<!-- <property name="poolPreparedStatements" value="true" /> <property 
@@ -121,15 +121,15 @@
 				<!-- 解决session关闭问题 -->
 				<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
 
-				<!-- <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory
 				</prop>
-				<prop key="hibernate.cache.provider_configuration_file_resource_path">classpath:ehcache/ehcache.xml</prop> -->
+				<prop key="hibernate.cache.provider_configuration_file_resource_path">classpath*:ehcache.xml</prop>
 				<!-- 启动"查询缓存"如果想缓存使用findall()、list()、Iterator()、createCriteria()、createQuery()等方法获得的数据结果集,必须配置此项 -->
-				<!-- <prop key="hibernate.cache.use_query_cache">true</prop> -->
+				<prop key="hibernate.cache.use_query_cache">true</prop>
 				<!-- 开启二级缓存 -->
-				<!-- <prop key="hibernate.cache.use_second_level_cache">true</prop> -->
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
 				<!-- 强制Hibernate以更人性化的格式将数据存入二级缓存 -->
-				<!-- <prop key="hibernate.cache.use_structured_entries">true</prop> -->
+				<prop key="hibernate.cache.use_structured_entries">true</prop>
 				<!-- Hibernate将收集有助于性能调节的统计数据 -->
 				<prop key="hibernate.generate_statistics">true</prop>
 			</props>

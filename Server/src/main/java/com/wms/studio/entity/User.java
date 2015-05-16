@@ -29,6 +29,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.wms.studio.api.constant.UserConstant;
 import com.wms.studio.api.constant.UserDisableReason;
 import com.wms.studio.api.constant.UserRole;
@@ -39,6 +42,7 @@ import com.wms.studio.api.constant.UserRole;
  */
 @Entity
 @Table(name = "tb_user")
+@Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @SuppressWarnings("serial")
 public class User implements Serializable {
 

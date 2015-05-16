@@ -26,12 +26,16 @@ import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
  * 主要用于保存用户的音乐或者电影列表，不使用关系的原因是本处直接处理比较简单，维护也更方便
  * @author WMS
  * @version 4.1
  */
 @SuppressWarnings("serial")
+@Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @MappedSuperclass
 public class Playlist implements Serializable {
 

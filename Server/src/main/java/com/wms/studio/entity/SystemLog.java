@@ -27,12 +27,16 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
  * @author WMS
  * 
  */
 @Entity
 @Table(name = "tb_system_log")
+@Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @SuppressWarnings("serial")
 public class SystemLog implements Serializable {
 
