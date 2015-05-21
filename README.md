@@ -4,6 +4,8 @@
 作者：吴梦升
 邮箱：560130911@163.com
 
+**项目wiki文档：[https://github.com/wu560130911/MultimediaDesktop/wiki](https://github.com/wu560130911/MultimediaDesktop/wiki)(还在完善中)**
+
 具体的系统设计和功能文档将在后期完善。。。。。。。。。。。。
 
 ## <a name="index"/>目录
