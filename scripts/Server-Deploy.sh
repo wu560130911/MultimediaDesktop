@@ -1,20 +1,21 @@
 #! /bin/sh
-#JAVA_HOME=/home/wms/tools/jdk1.8.0_25
-MAVEN_HOME=/home/wms/tools/maven
-PATH=.:$MAVEN_HOME/bin:$PATH
+JAVA_HOME=/home/tools/jdk1.8.0_25
+MAVEN_HOME=/home/tools/maven
+PATH=.:${JAVA_HOME}/bin:$MAVEN_HOME/bin:$PATH
 #LANG=zh_CN.gbk
-export MAVEN_HOME PATH
+export JAVA_HOME MAVEN_HOME PATH
 
-PROJECT_DIR=/home/wms/data/MultimediaDesktop
-DEPLOY_DIR=/home/wms/tools/deploy/
-HOST_IPADDRESS=`ifconfig enp2s0 | grep 'inet ' | awk '{ print $2}'`
-LOG_DIR=/home/wms/data/log/Server/${HOST_IPADDRESS}
+PROJECT_DIR=/home/project/trunk
+DEPLOY_DIR=/home/tools/deploy/
+HOST_IPADDRESS=`ifconfig eth2 | grep 'inet 地址:' | cut -d: -f2 | awk '{ print $1}'`
+LOG_DIR=/home/data/log/Server/${HOST_IPADDRESS}
 SVNUP_log=${LOG_DIR}/svnup.log
 RSYNC_log=${LOG_DIR}/rsync.log
 DEPLOY_LOG=${LOG_DIR}/deploy.log
 MAVEN_LOG=${LOG_DIR}/maven.log
 FILE_EXCLUDE="--exclude .svn"
 SERVER_DIR=${PROJECT_DIR}/Server/target/MultimediaDesktop-Server/
+
 srestart() {
   if [ -d "${DEPLOY_DIR}/bin" ];then
     /bin/sh ${DEPLOY_DIR}/bin/restart.sh
@@ -41,7 +42,7 @@ mavenCompile(){
     date "+%Y-%m-%d %H:%M:%S"
     time=$(date "+%Y-%m-%d %H:%M:%S")
     cd ${PROJECT_DIR}
-    $MAVE_HOME/bin/mvn clean package -Dmaven.test.skip=true
+    mvn clean package -Dmaven.test.skip=true
   }>>$MAVEN_LOG
   tail -10000 $MAVEN_LOG | sed -n "/$time/,\$p"
 }
@@ -77,12 +78,6 @@ sstop(){
     echo "请先部署下项目，然后再执行关闭操作."
   fi
 }
-
-if [ -d "${LOG_DIR}" ];then
-    echo ""
-  else
-    mkdir -p ${LOG_DIR}
-  fi
 
 ###########   Main Menu ###############
 mydate=`date +%Y-%m-%d`

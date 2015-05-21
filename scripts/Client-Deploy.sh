@@ -59,7 +59,7 @@ deploy(){
 	${CLIENT_DIR} ${DEPLOY_PROJECT}
   }>>${DEPLOY_LOG}
   sed -i "s#^log4j.appender.dblog.machineId=.*#log4j.appender.dblog.machineId=${HOST_IPADDRESS}@Client#g" ${DEPLOY_PROJECT}WEB-INF/classes/log4j.properties  
-  sed -i "s#^log4j.appender.RollingFile.File=.*#log4j.appender.RollingFile.File=${LOG_DIR}/${HOST_IPADDRESS}@Server.log#g" ${DEPLOY_PROJECT}WEB-INF/classes/log4j.properties
+  sed -i "s#^log4j.appender.RollingFile.File=.*#log4j.appender.RollingFile.File=${LOG_DIR}/${HOST_IPADDRESS}@Client.log#g" ${DEPLOY_PROJECT}WEB-INF/classes/log4j.properties
   sed -i "s#^dubbo.protocol.host=.*#dubbo.protocol.host=${HOST_IPADDRESS}#g" ${DEPLOY_PROJECT}WEB-INF/classes/server.properties
   sed -i "s#^server.basePath=.*#server.basePath=${NGINX_STATICS}#g" ${DEPLOY_PROJECT}WEB-INF/classes/server.properties
   sed -i "s#^server.mediaBasePath=.*#server.mediaBasePath=${FILE_MEDIA_DIR}#g" ${DEPLOY_PROJECT}WEB-INF/classes/server.properties
