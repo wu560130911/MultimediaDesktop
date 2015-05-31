@@ -25,7 +25,7 @@ import com.wms.studio.entity.User;
  * 
  */
 @Component("applicationCovert")
-public class ApplicationCovert extends
+public final class ApplicationCovert extends
 		AbstractCovert<Application, ApplicationDto> {
 
 	@Override

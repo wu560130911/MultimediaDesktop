@@ -30,7 +30,7 @@ import com.wms.studio.exception.VerificationException;
  * 
  */
 @Component("builtInApplicationConvert")
-public class BuiltInApplicationConvert extends
+public final class BuiltInApplicationConvert extends
 		AbstractCovert<BuiltInApplication, BuiltInApplicationDto> {
 
 	@Resource

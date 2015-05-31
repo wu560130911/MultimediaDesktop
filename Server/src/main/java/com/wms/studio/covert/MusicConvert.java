@@ -26,7 +26,7 @@ import com.wms.studio.exception.VerificationException;
  * 
  */
 @Component("musicConvert")
-public class MusicConvert extends AbstractCovert<Music, MusicDto> {
+public final class MusicConvert extends AbstractCovert<Music, MusicDto> {
 
 	@Override
 	public MusicDto covertToDto(Music e) {

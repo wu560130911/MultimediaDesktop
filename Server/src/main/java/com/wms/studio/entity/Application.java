@@ -24,6 +24,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
@@ -44,7 +45,11 @@ import com.wms.studio.api.constant.UserRole;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "tb_application")
+@Table(name = "tb_application",indexes={
+		@Index(columnList="type_group",name="application_typegroup_index"),
+		@Index(columnList="role,type_group",name="application_role_typegroup_index"),
+		@Index(columnList="role",name="application_role_index")
+})
 @Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Application implements Serializable {
 
@@ -81,6 +86,7 @@ public class Application implements Serializable {
 	private UserRole role;// 标记是否为管理员应用
 
 	@Enumerated(EnumType.STRING)
+	@Column(name="type_group")
 	// 本应用的类型
 	private ApplicationType typeGroup;
 

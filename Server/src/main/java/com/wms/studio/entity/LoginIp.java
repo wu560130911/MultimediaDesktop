@@ -17,6 +17,7 @@ package com.wms.studio.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -24,6 +25,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
@@ -41,9 +43,9 @@ import com.wms.studio.api.constant.LoginType;
  * 
  */
 @Entity
-@Table(name = "tb_login_ip")
+@Table(name = "tb_login_ip", indexes = { @Index(columnList = "user_id,login_type", name = "login_ip_logintype_index") })
 @SuppressWarnings("serial")
-@Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class LoginIp implements Serializable {
 
 	@Id
@@ -56,6 +58,7 @@ public class LoginIp implements Serializable {
 	private Date loginTime;
 
 	@Enumerated(EnumType.STRING)
+	@Column(length=50,name="login_type")
 	private LoginType loginType;
 
 	@ManyToOne(fetch = FetchType.LAZY)

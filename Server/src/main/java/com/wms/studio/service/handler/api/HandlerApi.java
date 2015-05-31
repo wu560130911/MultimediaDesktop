@@ -21,4 +21,6 @@ package com.wms.studio.service.handler.api;
 public interface HandlerApi<T> {
 
 	boolean excute(T t);
+	
+	boolean isAbort();
 }

@@ -22,6 +22,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
@@ -41,8 +42,8 @@ import com.wms.studio.api.constant.UserRole;
  * 
  */
 @Entity
-@Table(name = "tb_user")
-@Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Table(name = "tb_user", indexes = { @Index(name = "user_email_index", columnList = "email", unique = true) })
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @SuppressWarnings("serial")
 public class User implements Serializable {
 

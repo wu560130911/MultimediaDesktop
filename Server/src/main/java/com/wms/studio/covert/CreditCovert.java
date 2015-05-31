@@ -25,7 +25,7 @@ import com.wms.studio.exception.VerificationException;
  * 
  */
 @Component("creditCovert")
-public class CreditCovert extends AbstractCovert<Credit, CreditDto> {
+public final class CreditCovert extends AbstractCovert<Credit, CreditDto> {
 
 	@Override
 	public CreditDto covertToDto(Credit e) {

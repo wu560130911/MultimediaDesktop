@@ -51,4 +51,8 @@ public abstract class AbstractHandler implements HandlerApi<HandlerData> {
 		return data.getResult();
 	}
 
+	@Override
+	public boolean isAbort() {
+		return false;
+	}
 }

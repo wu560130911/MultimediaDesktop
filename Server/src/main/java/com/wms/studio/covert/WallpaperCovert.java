@@ -25,7 +25,7 @@ import com.wms.studio.entity.Wallpaper;
  * 
  */
 @Component("wallpaperCovert")
-public class WallpaperCovert extends AbstractCovert<Wallpaper, WallpaperDto> {
+public final class WallpaperCovert extends AbstractCovert<Wallpaper, WallpaperDto> {
 
 	@Override
 	public WallpaperDto covertToDto(Wallpaper e) {

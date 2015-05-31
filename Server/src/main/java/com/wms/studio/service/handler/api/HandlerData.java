@@ -25,6 +25,7 @@ public class HandlerData {
 	private HashMap<String, Object> hashMap = new HashMap<>(2);
 	private static final String ARGS_KEY = "args";
 	private static final String RESULT_KEY = "result";
+	private static final String EXCEPTION_KEY = "exception";
 
 	public HandlerData() {
 
@@ -38,6 +39,10 @@ public class HandlerData {
 		return hashMap.put(RESULT_KEY, object);
 	}
 
+	public Object setException(Exception e) {
+		return hashMap.put(EXCEPTION_KEY, e);
+	}
+
 	@SuppressWarnings("unchecked")
 	public <V> V getArgs() {
 		return (V) hashMap.get(ARGS_KEY);
@@ -46,6 +51,11 @@ public class HandlerData {
 	@SuppressWarnings("unchecked")
 	public <V> V getResult() {
 		return (V) hashMap.get(RESULT_KEY);
+	}
+
+	@SuppressWarnings("unchecked")
+	public <V> V getException() {
+		return (V) hashMap.get(EXCEPTION_KEY);
 	}
 
 	public Object put(String key, Object object) {

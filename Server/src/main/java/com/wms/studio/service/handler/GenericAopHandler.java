@@ -28,6 +28,7 @@ import org.springframework.stereotype.Component;
 
 import com.wms.studio.annotations.HandlerAnnotationFactoryBean;
 import com.wms.studio.annotations.HandlerPoint;
+import com.wms.studio.annotations.HandlerScope;
 import com.wms.studio.api.utils.StringUtils;
 import com.wms.studio.service.handler.api.HandlerApi;
 import com.wms.studio.service.handler.api.HandlerData;
@@ -52,29 +53,52 @@ public class GenericAopHandler {
 		this.handlerAnnotationFactoryBean = handlerAnnotationFactoryBean;
 	}
 
+	/**
+	 * TODO 需要继续优化代码
+	 * 
+	 * @param point
+	 * @return
+	 * @throws Throwable
+	 */
 	@Around(value = TAG)
 	public Object process(ProceedingJoinPoint point) throws Throwable {
 
 		String handlerName = getHandlerName(point);
 		HandlerData data = null;
+		Object result = null;
+		boolean handlerResult = false;
 
 		if (StringUtils.isBlank(handlerName)) {
-			log.debug("未为该方法配置任何处理业务"
-					+ point.getSignature().getName());
+			log.debug("未为该方法配置任何处理业务" + point.getSignature().getName());
 		} else {
 			data = new HandlerData();
-			//data.put("args", point.getArgs());
 			data.setArgs(point.getArgs());
-			execute(handlerAnnotationFactoryBean.getBeforeHandlers(handlerName),
+			handlerResult = execute(
+					handlerAnnotationFactoryBean.getBeforeHandlers(handlerName),
 					data);
 		}
 
-		Object result = point.proceed();
+		if (handlerResult) {
+			return null;
+		}
+
+		try {
+			result = point.proceed();
+		} catch (Exception e) {
+			if (!StringUtils.isBlank(handlerName)) {
+				data.setException(e);
+				handlerResult = execute(
+						handlerAnnotationFactoryBean.getHandlers(handlerName,
+								HandlerScope.Exception), data);
+			} else {
+				throw e;
+			}
+		}
 
 		if (!StringUtils.isBlank(handlerName)) {
-			//data.put("result", result);
 			data.setResult(result);
-			execute(handlerAnnotationFactoryBean.getAfterHandlers(handlerName),
+			handlerResult = execute(
+					handlerAnnotationFactoryBean.getAfterHandlers(handlerName),
 					data);
 		}
 
@@ -82,17 +106,21 @@ public class GenericAopHandler {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private void execute(List<HandlerApi> handlers, HandlerData data) {
+	private boolean execute(List<HandlerApi> handlers, HandlerData data) {
+		boolean flag = false;
 		for (HandlerApi handler : handlers) {
 			handler.excute(data);
+			flag = flag || handler.isAbort();
 		}
+		return flag;
 	}
 
-	private String getHandlerName(ProceedingJoinPoint point) throws NoSuchMethodException {
+	private String getHandlerName(ProceedingJoinPoint point)
+			throws NoSuchMethodException {
 
-		//Object object = point.getTarget();
-		//Signature signature = point.getSignature();
-		//String name = signature.getName();
+		// Object object = point.getTarget();
+		// Signature signature = point.getSignature();
+		// String name = signature.getName();
 		// Class<?>[] parameterTypes = ((MethodSignature) point.getSignature())
 		// .getMethod().getParameterTypes();
 		try {

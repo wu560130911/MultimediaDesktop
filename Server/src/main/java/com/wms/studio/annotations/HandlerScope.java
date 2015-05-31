@@ -19,5 +19,5 @@ package com.wms.studio.annotations;
  * 
  */
 public enum HandlerScope {
-	Before, After,None
+	Before, After,None,Exception
 }

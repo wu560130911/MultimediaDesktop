@@ -30,7 +30,7 @@ import com.wms.studio.exception.VerificationException;
  * 
  */
 @Component("moviePlaylistConvert")
-public class MoviePlaylistConvert extends
+public final class MoviePlaylistConvert extends
 		AbstractCovert<MoviePlaylist, MoviePlaylistDto> {
 
 	@Resource()

@@ -43,25 +43,23 @@ import com.wms.studio.service.handler.api.HandlerApi;
  * 
  */
 @SuppressWarnings("rawtypes")
-public class HandlerAnnotationFactoryBean {
+public final class HandlerAnnotationFactoryBean {
 
 	private static final Logger log = Logger
 			.getLogger(HandlerAnnotationFactoryBean.class);
 
 	private static final String RESOURCE_PATTERN = "/**/*.class";
 
-	private ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
+	private final ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
 
-	private List<String> packagesList = new LinkedList<String>();
+	private final List<String> packagesList = new LinkedList<String>();
 
-	private List<TypeFilter> typeFilters = new LinkedList<TypeFilter>();
+	private final List<TypeFilter> typeFilters = new LinkedList<TypeFilter>();
 
 	@Autowired
 	private ApplicationContext context;
 
-	private static final ConcurrentHashMap<String, LinkedList<HandlerApi>> beforeHandler = new ConcurrentHashMap<String, LinkedList<HandlerApi>>();
-
-	private static final ConcurrentHashMap<String, LinkedList<HandlerApi>> afterHandler = new ConcurrentHashMap<String, LinkedList<HandlerApi>>();
+	private static final ConcurrentHashMap<String, ConcurrentHashMap<HandlerScope, LinkedList<HandlerApi>>> handlersMap = new ConcurrentHashMap<String, ConcurrentHashMap<HandlerScope, LinkedList<HandlerApi>>>();
 
 	public void setContext(ApplicationContext context) {
 		this.context = context;
@@ -97,74 +95,101 @@ public class HandlerAnnotationFactoryBean {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	public void init() throws IOException, ClassNotFoundException {
+	public void init() {
 		log.info("业务Handler注解工厂类，扫描系统中所有的业务处理类");
-		if (!this.packagesList.isEmpty()) {
-			for (String pkg : this.packagesList) {
-				String pattern = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX
-						+ ClassUtils.convertClassNameToResourcePath(pkg)
-						+ RESOURCE_PATTERN;
-				Resource[] resources = this.resourcePatternResolver
-						.getResources(pattern);
-				MetadataReaderFactory readerFactory = new CachingMetadataReaderFactory(
-						this.resourcePatternResolver);
-				for (Resource resource : resources) {
-					if (resource.isReadable()) {
-						MetadataReader reader = readerFactory
-								.getMetadataReader(resource);
-						// 这儿可以抽象出来，但是因为本项目只需要一个注解扫描
-						if (matchesEntityTypeFilter(reader, readerFactory)) {
-							Map<String, Object> map = reader
-									.getAnnotationMetadata()
-									.getAnnotationAttributes(
-											"com.wms.studio.annotations.Handler");
-							if (map != null) {
-								String handlerName = (String) map
-										.get("handlerName");
-								String beanName = (String) map.get("beanName");
-								HandlerScope scope = (HandlerScope) map
-										.get("scope");
-								if (scope == HandlerScope.None) {
-									continue;
-								}
-								addHandler(handlerName, beanName, scope);
-							}
+		beforeHandlerResource(handlersMap);
+	}
+
+	private void beforeHandlerResource(
+			ConcurrentHashMap<String, ConcurrentHashMap<HandlerScope, LinkedList<HandlerApi>>> handlersMap) {
+		try {
+
+			if (!this.packagesList.isEmpty()) {
+				for (String pkg : this.packagesList) {
+					String pattern = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX
+							+ ClassUtils.convertClassNameToResourcePath(pkg)
+							+ RESOURCE_PATTERN;
+					Resource[] resources = this.resourcePatternResolver
+							.getResources(pattern);
+					MetadataReaderFactory readerFactory = new CachingMetadataReaderFactory(
+							this.resourcePatternResolver);
+
+					onHandlerResource(resources, readerFactory, handlersMap);
+
+				}
+			}
+		} catch (IOException e) {
+			log.fatal("扫描业务处理异常", e);
+		}
+	}
+
+	private void onHandlerResource(
+			Resource[] resources,
+			MetadataReaderFactory readerFactory,
+			ConcurrentHashMap<String, ConcurrentHashMap<HandlerScope, LinkedList<HandlerApi>>> handlersMap)
+			throws IOException {
+
+		if (resources == null || readerFactory == null) {
+			return;
+		}
+
+		for (Resource resource : resources) {
+			if (resource.isReadable()) {
+				MetadataReader reader = readerFactory
+						.getMetadataReader(resource);
+				// 这儿可以抽象出来，但是因为本项目只需要一个注解扫描
+				if (matchesEntityTypeFilter(reader, readerFactory)) {
+					Map<String, Object> map = reader.getAnnotationMetadata()
+							.getAnnotationAttributes(
+									"com.wms.studio.annotations.Handler");
+					if (map != null) {
+						String handlerName = (String) map.get("handlerName");
+						String beanName = (String) map.get("beanName");
+						HandlerScope scope = (HandlerScope) map.get("scope");
+						if (scope == HandlerScope.None) {
+							continue;
 						}
+
+						addHandler(handlerName, beanName, scope, handlersMap);
 					}
 				}
 			}
 		}
 	}
 
-	private void addHandler(String handlerName, String beanName,
-			HandlerScope scope) {
+	private void addHandler(
+			String handlerName,
+			String beanName,
+			HandlerScope scope,
+			ConcurrentHashMap<String, ConcurrentHashMap<HandlerScope, LinkedList<HandlerApi>>> handlersMap) {
+
 		if (StringUtils.isBlank(beanName) || StringUtils.isBlank(handlerName)) {
 			return;
 		}
+
 		HandlerApi handlerBean = context.getBean(beanName, HandlerApi.class);
+
 		if (handlerBean == null) {
 			log.fatal("请检查处理标识，未找到该处理类:" + handlerName);
 			return;
 		}
-		if (HandlerScope.Before.equals(scope)) {
-			addHandlerList(beforeHandler, handlerName, handlerBean);
-		} else if (HandlerScope.After.equals(scope)) {
-			addHandlerList(afterHandler, handlerName, handlerBean);
-		}
-	}
 
-	private void addHandlerList(
-			ConcurrentHashMap<String, LinkedList<HandlerApi>> handler,
-			String handlerName, HandlerApi bean) {
-		if (bean == null || StringUtils.isBlank(handlerName) || handler == null) {
-			return;
+		ConcurrentHashMap<HandlerScope, LinkedList<HandlerApi>> handlerNameHandler = handlersMap
+				.get(handlerName);
+
+		if (handlerNameHandler == null) {
+			handlerNameHandler = new ConcurrentHashMap<HandlerScope, LinkedList<HandlerApi>>();
+			handlersMap.put(handlerName, handlerNameHandler);
 		}
-		LinkedList<HandlerApi> handlers = handler.get(handlerName);
-		if (handlers == null) {
-			handlers = new LinkedList<HandlerApi>();
-			handler.put(handlerName, handlers);
+
+		LinkedList<HandlerApi> handlerApiBeans = handlerNameHandler.get(scope);
+
+		if (handlerApiBeans == null) {
+			handlerApiBeans = new LinkedList<HandlerApi>();
+			handlerNameHandler.put(scope, handlerApiBeans);
 		}
-		handlers.add(bean);
+
+		handlerApiBeans.add(handlerBean);
 	}
 
 	/**
@@ -188,18 +213,39 @@ public class HandlerAnnotationFactoryBean {
 	}
 
 	public List<HandlerApi> getBeforeHandlers(String handlerName) {
-		if (StringUtils.isBlank(handlerName)
-				|| beforeHandler.get(handlerName) == null) {
-			return Collections.emptyList();
-		}
-		return Collections.unmodifiableList(beforeHandler.get(handlerName));
+
+		return getHandlers(handlerName, HandlerScope.Before);
 	}
 
 	public List<HandlerApi> getAfterHandlers(String handlerName) {
-		if (StringUtils.isBlank(handlerName)
-				|| afterHandler.get(handlerName) == null) {
+		return getHandlers(handlerName, HandlerScope.After);
+	}
+
+	public List<HandlerApi> getHandlers(String handlerName, HandlerScope scope) {
+
+		if (StringUtils.isBlank(handlerName) || scope == null
+				|| HandlerScope.None.equals(scope)) {
 			return Collections.emptyList();
 		}
-		return Collections.unmodifiableList(afterHandler.get(handlerName));
+		ConcurrentHashMap<HandlerScope, LinkedList<HandlerApi>> handlerNameHandler = handlersMap
+				.get(handlerName);
+		if (handlerNameHandler == null) {
+			return Collections.emptyList();
+		}
+
+		LinkedList<HandlerApi> handlerApis = handlerNameHandler.get(scope);
+
+		if (handlerApis == null) {
+			return Collections.emptyList();
+		}
+
+		return Collections.unmodifiableList(handlerApis);
+	}
+
+	public synchronized void refresh() {
+		final ConcurrentHashMap<String, ConcurrentHashMap<HandlerScope, LinkedList<HandlerApi>>> tempHandlersMap = new ConcurrentHashMap<String, ConcurrentHashMap<HandlerScope, LinkedList<HandlerApi>>>();
+		beforeHandlerResource(tempHandlersMap);
+		handlersMap.clear();
+		handlersMap.putAll(tempHandlersMap);
 	}
 }

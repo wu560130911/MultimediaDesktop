@@ -30,7 +30,7 @@ import com.wms.studio.exception.VerificationException;
  * 
  */
 @Component("userApplicationConvert")
-public class UserApplicationConvert extends
+public final class UserApplicationConvert extends
 		AbstractCovert<UserApplication, UserApplicationDto> {
 
 	@Resource

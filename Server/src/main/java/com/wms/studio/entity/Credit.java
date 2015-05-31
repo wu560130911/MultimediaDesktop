@@ -25,6 +25,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
@@ -43,9 +44,9 @@ import com.wms.studio.api.constant.CreditType;
  * @author WMS
  */
 @Entity
-@Table(name = "tb_credit")
+@Table(name = "tb_credit", indexes = { @Index(columnList = "credit_type,user_id", name = "credit_credittype_index") })
 @SuppressWarnings("serial")
-@Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Credit implements Serializable {
 
 	@Id
@@ -66,6 +67,7 @@ public class Credit implements Serializable {
 	private User user;
 
 	@Enumerated(EnumType.STRING)
+	@Column(name="credit_type",length=10)
 	private CreditType creditType;
 
 	public Credit() {
@@ -127,7 +129,7 @@ public class Credit implements Serializable {
 	public void setCreditType(CreditType creditType) {
 		this.creditType = creditType;
 	}
-	
+
 	@PrePersist
 	public void beforePersist() {
 		changeTime = new Date();

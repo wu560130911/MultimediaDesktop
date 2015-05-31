@@ -25,7 +25,7 @@ import com.wms.studio.exception.VerificationException;
  * 
  */
 @Component("userAppConvert")
-public class UserAppConvert extends AbstractCovert<UserApplication, UserAppDto> {
+public final class UserAppConvert extends AbstractCovert<UserApplication, UserAppDto> {
 
 	@Override
 	public UserAppDto covertToDto(UserApplication e) {

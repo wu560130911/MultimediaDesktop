@@ -25,7 +25,7 @@ import com.wms.studio.exception.VerificationException;
  * 
  */
 @Component("userInfoCovert")
-public class UserInfoCovert extends AbstractCovert<User, UserInfoDto> {
+public final class UserInfoCovert extends AbstractCovert<User, UserInfoDto> {
 
 	@Override
 	public UserInfoDto covertToDto(User e) {

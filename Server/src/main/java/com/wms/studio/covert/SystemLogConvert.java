@@ -20,7 +20,7 @@ import com.wms.studio.entity.SystemLog;
 import com.wms.studio.exception.VerificationException;
 
 @Component("systemLogConvert")
-public class SystemLogConvert extends AbstractCovert<SystemLog, SystemLogDto> {
+public final class SystemLogConvert extends AbstractCovert<SystemLog, SystemLogDto> {
 
 	@Override
 	public SystemLogDto covertToDto(SystemLog e) {

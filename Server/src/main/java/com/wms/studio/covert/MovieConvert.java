@@ -26,7 +26,7 @@ import com.wms.studio.exception.VerificationException;
  * 
  */
 @Component("movieConvert")
-public class MovieConvert extends AbstractCovert<Movie, MovieDto> {
+public final class MovieConvert extends AbstractCovert<Movie, MovieDto> {
 
 	@Override
 	public MovieDto covertToDto(Movie e) {

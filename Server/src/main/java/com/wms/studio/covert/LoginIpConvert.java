@@ -25,7 +25,7 @@ import com.wms.studio.exception.VerificationException;
  * 
  */
 @Component("loginIpConvert")
-public class LoginIpConvert extends AbstractCovert<LoginIp, LoginIpInfoDto> {
+public final class LoginIpConvert extends AbstractCovert<LoginIp, LoginIpInfoDto> {
 
 	@Override
 	public LoginIpInfoDto covertToDto(LoginIp e) {
