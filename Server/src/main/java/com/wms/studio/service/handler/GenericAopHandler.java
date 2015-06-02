@@ -24,6 +24,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.wms.studio.annotations.HandlerAnnotationFactoryBean;
@@ -48,9 +49,20 @@ public class GenericAopHandler {
 	@Resource
 	private HandlerAnnotationFactoryBean handlerAnnotationFactoryBean;
 
+	@Resource
+	private ApplicationContext applicationContext;
+
 	public void setHandlerAnnotationFactoryBean(
 			HandlerAnnotationFactoryBean handlerAnnotationFactoryBean) {
 		this.handlerAnnotationFactoryBean = handlerAnnotationFactoryBean;
+	}
+
+	/**
+	 * @param applicationContext
+	 *            the applicationContext to set
+	 */
+	public void setApplicationContext(ApplicationContext applicationContext) {
+		this.applicationContext = applicationContext;
 	}
 
 	/**
@@ -64,18 +76,15 @@ public class GenericAopHandler {
 	public Object process(ProceedingJoinPoint point) throws Throwable {
 
 		String handlerName = getHandlerName(point);
+		boolean isNeedHandler = StringUtils.isNotBlank(handlerName);
 		HandlerData data = null;
 		Object result = null;
 		boolean handlerResult = false;
 
-		if (StringUtils.isBlank(handlerName)) {
-			log.debug("未为该方法配置任何处理业务" + point.getSignature().getName());
-		} else {
+		if (isNeedHandler) {
 			data = new HandlerData();
 			data.setArgs(point.getArgs());
-			handlerResult = execute(
-					handlerAnnotationFactoryBean.getBeforeHandlers(handlerName),
-					data);
+			handlerResult = beforeProcess(data, handlerName);
 		}
 
 		if (handlerResult) {
@@ -85,32 +94,54 @@ public class GenericAopHandler {
 		try {
 			result = point.proceed();
 		} catch (Exception e) {
-			if (!StringUtils.isBlank(handlerName)) {
+			if (isNeedHandler) {
 				data.setException(e);
-				handlerResult = execute(
-						handlerAnnotationFactoryBean.getHandlers(handlerName,
-								HandlerScope.Exception), data);
+				handlerResult = exceptionProcess(data, handlerName);
 			} else {
 				throw e;
 			}
 		}
 
-		if (!StringUtils.isBlank(handlerName)) {
+		if (isNeedHandler) {
 			data.setResult(result);
-			handlerResult = execute(
-					handlerAnnotationFactoryBean.getAfterHandlers(handlerName),
-					data);
+			handlerResult = afterProcess(data, handlerName);
 		}
 
 		return result;
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private boolean execute(List<HandlerApi> handlers, HandlerData data) {
+	private boolean beforeProcess(HandlerData data, String handlerName) {
+		return execute(
+				handlerAnnotationFactoryBean.getBeforeHandlers(handlerName),
+				data);
+	}
+
+	private boolean afterProcess(HandlerData data, String handlerName) {
+		return execute(
+				handlerAnnotationFactoryBean.getAfterHandlers(handlerName),
+				data);
+	}
+
+	private boolean exceptionProcess(HandlerData data, String handlerName) {
+		return execute(handlerAnnotationFactoryBean.getHandlers(handlerName,
+				HandlerScope.Exception), data);
+	}
+
+	@SuppressWarnings({ "unchecked" })
+	private boolean execute(List<String> handlers, HandlerData data) {
 		boolean flag = false;
-		for (HandlerApi handler : handlers) {
-			handler.excute(data);
-			flag = flag || handler.isAbort();
+		for (String handler : handlers) {
+
+			HandlerApi<HandlerData> handlerBean = applicationContext.getBean(
+					handler, HandlerApi.class);
+
+			if (handlerBean == null) {
+				log.fatal("未在容器里找到对应的处理逻辑类，handlerBeanName=" + handler);
+				continue;
+			}
+
+			handlerBean.excute(data);
+			flag = flag || handlerBean.isAbort();
 		}
 		return flag;
 	}

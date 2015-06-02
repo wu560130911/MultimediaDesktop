@@ -23,8 +23,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -36,13 +34,11 @@ import org.springframework.core.type.filter.TypeFilter;
 import org.springframework.util.ClassUtils;
 
 import com.wms.studio.api.utils.StringUtils;
-import com.wms.studio.service.handler.api.HandlerApi;
 
 /**
  * @author WMS
  * 
  */
-@SuppressWarnings("rawtypes")
 public final class HandlerAnnotationFactoryBean {
 
 	private static final Logger log = Logger
@@ -56,14 +52,7 @@ public final class HandlerAnnotationFactoryBean {
 
 	private final List<TypeFilter> typeFilters = new LinkedList<TypeFilter>();
 
-	@Autowired
-	private ApplicationContext context;
-
-	private static final ConcurrentHashMap<String, ConcurrentHashMap<HandlerScope, LinkedList<HandlerApi>>> handlersMap = new ConcurrentHashMap<String, ConcurrentHashMap<HandlerScope, LinkedList<HandlerApi>>>();
-
-	public void setContext(ApplicationContext context) {
-		this.context = context;
-	}
+	private static final ConcurrentHashMap<String, ConcurrentHashMap<HandlerScope, LinkedList<String>>> handlersBeanNameMap = new ConcurrentHashMap<String, ConcurrentHashMap<HandlerScope, LinkedList<String>>>();
 
 	/**
 	 * 构造函数
@@ -97,11 +86,11 @@ public final class HandlerAnnotationFactoryBean {
 	 */
 	public void init() {
 		log.info("业务Handler注解工厂类，扫描系统中所有的业务处理类");
-		beforeHandlerResource(handlersMap);
+		beforeHandlerResource(handlersBeanNameMap);
 	}
 
 	private void beforeHandlerResource(
-			ConcurrentHashMap<String, ConcurrentHashMap<HandlerScope, LinkedList<HandlerApi>>> handlersMap) {
+			ConcurrentHashMap<String, ConcurrentHashMap<HandlerScope, LinkedList<String>>> handlersMap) {
 		try {
 
 			if (!this.packagesList.isEmpty()) {
@@ -126,7 +115,7 @@ public final class HandlerAnnotationFactoryBean {
 	private void onHandlerResource(
 			Resource[] resources,
 			MetadataReaderFactory readerFactory,
-			ConcurrentHashMap<String, ConcurrentHashMap<HandlerScope, LinkedList<HandlerApi>>> handlersMap)
+			ConcurrentHashMap<String, ConcurrentHashMap<HandlerScope, LinkedList<String>>> handlersMap)
 			throws IOException {
 
 		if (resources == null || readerFactory == null) {
@@ -161,35 +150,28 @@ public final class HandlerAnnotationFactoryBean {
 			String handlerName,
 			String beanName,
 			HandlerScope scope,
-			ConcurrentHashMap<String, ConcurrentHashMap<HandlerScope, LinkedList<HandlerApi>>> handlersMap) {
+			ConcurrentHashMap<String, ConcurrentHashMap<HandlerScope, LinkedList<String>>> handlersMap) {
 
 		if (StringUtils.isBlank(beanName) || StringUtils.isBlank(handlerName)) {
 			return;
 		}
 
-		HandlerApi handlerBean = context.getBean(beanName, HandlerApi.class);
-
-		if (handlerBean == null) {
-			log.fatal("请检查处理标识，未找到该处理类:" + handlerName);
-			return;
-		}
-
-		ConcurrentHashMap<HandlerScope, LinkedList<HandlerApi>> handlerNameHandler = handlersMap
+		ConcurrentHashMap<HandlerScope, LinkedList<String>> handlerNameHandler = handlersMap
 				.get(handlerName);
 
 		if (handlerNameHandler == null) {
-			handlerNameHandler = new ConcurrentHashMap<HandlerScope, LinkedList<HandlerApi>>();
+			handlerNameHandler = new ConcurrentHashMap<HandlerScope, LinkedList<String>>();
 			handlersMap.put(handlerName, handlerNameHandler);
 		}
 
-		LinkedList<HandlerApi> handlerApiBeans = handlerNameHandler.get(scope);
+		LinkedList<String> handlerApiBeans = handlerNameHandler.get(scope);
 
 		if (handlerApiBeans == null) {
-			handlerApiBeans = new LinkedList<HandlerApi>();
+			handlerApiBeans = new LinkedList<String>();
 			handlerNameHandler.put(scope, handlerApiBeans);
 		}
 
-		handlerApiBeans.add(handlerBean);
+		handlerApiBeans.add(beanName);
 	}
 
 	/**
@@ -212,28 +194,28 @@ public final class HandlerAnnotationFactoryBean {
 		return false;
 	}
 
-	public List<HandlerApi> getBeforeHandlers(String handlerName) {
+	public List<String> getBeforeHandlers(String handlerName) {
 
 		return getHandlers(handlerName, HandlerScope.Before);
 	}
 
-	public List<HandlerApi> getAfterHandlers(String handlerName) {
+	public List<String> getAfterHandlers(String handlerName) {
 		return getHandlers(handlerName, HandlerScope.After);
 	}
 
-	public List<HandlerApi> getHandlers(String handlerName, HandlerScope scope) {
+	public List<String> getHandlers(String handlerName, HandlerScope scope) {
 
 		if (StringUtils.isBlank(handlerName) || scope == null
 				|| HandlerScope.None.equals(scope)) {
 			return Collections.emptyList();
 		}
-		ConcurrentHashMap<HandlerScope, LinkedList<HandlerApi>> handlerNameHandler = handlersMap
+		ConcurrentHashMap<HandlerScope, LinkedList<String>> handlerNameHandler = handlersBeanNameMap
 				.get(handlerName);
 		if (handlerNameHandler == null) {
 			return Collections.emptyList();
 		}
 
-		LinkedList<HandlerApi> handlerApis = handlerNameHandler.get(scope);
+		LinkedList<String> handlerApis = handlerNameHandler.get(scope);
 
 		if (handlerApis == null) {
 			return Collections.emptyList();
@@ -243,9 +225,9 @@ public final class HandlerAnnotationFactoryBean {
 	}
 
 	public synchronized void refresh() {
-		final ConcurrentHashMap<String, ConcurrentHashMap<HandlerScope, LinkedList<HandlerApi>>> tempHandlersMap = new ConcurrentHashMap<String, ConcurrentHashMap<HandlerScope, LinkedList<HandlerApi>>>();
+		final ConcurrentHashMap<String, ConcurrentHashMap<HandlerScope, LinkedList<String>>> tempHandlersMap = new ConcurrentHashMap<String, ConcurrentHashMap<HandlerScope, LinkedList<String>>>();
 		beforeHandlerResource(tempHandlersMap);
-		handlersMap.clear();
-		handlersMap.putAll(tempHandlersMap);
+		handlersBeanNameMap.clear();
+		handlersBeanNameMap.putAll(tempHandlersMap);
 	}
 }
