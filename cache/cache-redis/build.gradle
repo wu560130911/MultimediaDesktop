@@ -1,0 +1,7 @@
+
+description = ''
+dependencies {
+    compile group: 'redis.clients', name: 'jedis', version:'2.7.2'
+    compile group: 'org.springframework.data', name: 'spring-data-redis', version:'1.6.0.RELEASE'
+  compile project(':cache:cache-api')
+}

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug">
+	<Properties>
+		<Property name="filename">D:/log/web-$${sd:type}</Property>
+	</Properties>
+	<ThresholdFilter level="debug" />
+
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+
+		<List name="List">
+			<ThresholdFilter level="debug" />
+		</List>
+
+		<Routing name="Routing">
+			<Routes pattern="$${sd:type}">
+				<Route>
+					<RollingFile name="Rolling-${sd:type}" fileName="${filename}.log"
+						filePattern="${filename}-$${date:MM-dd-yyyy}.%i.log.gz">
+						<PatternLayout>
+							<pattern>%d [%t] %-5level %logger{36} - %msg%n</pattern>
+						</PatternLayout>
+						<SizeBasedTriggeringPolicy size="500" />
+					</RollingFile>
+				</Route>
+				<Route ref="Console" key="Audit" />
+				<Route ref="List" key="Service"/>
+			</Routes>
+		</Routing>
+	</Appenders>
+	<Loggers>
+		<Logger name="EventLogger" level="info" additivity="false">
+			<AppenderRef ref="Routing" />
+		</Logger>
+		<Root level="error">
+			<AppenderRef ref="Console" />
+		</Root>
+	</Loggers>
+</Configuration>

@@ -1,0 +1,32 @@
+allprojects  {
+  apply plugin: 'maven'
+
+  group = 'com.wms.studio'
+version = '1.0.1-SNAPSHOT'
+}
+
+subprojects {
+  apply plugin: 'java'
+  sourceCompatibility = 1.5
+  targetCompatibility = 1.5
+
+  
+  repositories {
+    mavenLocal()
+    
+    maven { url "http://repo.maven.apache.org/maven2" }
+  }
+
+  
+  dependencies {
+    compile group: 'commons-codec', name: 'commons-codec', version:'1.8'
+    compile group: 'com.google.guava', name: 'guava', version:'14.0.1'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version:'3.1'
+    compile group: 'commons-collections', name: 'commons-collections', version:'3.2.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version:'2.3'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version:'2.3'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-1.2-api', version:'2.3'
+}
+
+  
+}

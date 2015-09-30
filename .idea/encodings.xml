@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Server-API" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/admin-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/server-app" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/application/server-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cache" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cache" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cache/cache-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cache/cache-api/src/main/java/com/wms/studio/cache/api/Cache.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/cache/cache-api/src/main/java/com/wms/studio/cache/api/CacheManager.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/cache/cache-redis" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cache/cache-redis/src/main/java/com/wms/studio/cache/redis/RedisCache.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/cache/cache-redis/src/main/java/com/wms/studio/cache/redis/RedisCacheManager.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/cache/cache-redis/src/main/java/com/wms/studio/cache/redis/RedisCallback.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/cache/cache-redis/src/main/resources/log4j2.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/common-utils" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/domain" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/domain/domain-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/domain/domain-entity" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/domain/domain-transfer" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/handler" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/handler/handler-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/handler/handler-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/repository" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/repository/repository-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/repository/repository-impl" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/service-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/service-impl" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/test" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/test/server-web-test" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/test/server-web-test" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/utils" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/utils" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/utils/common-utils" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/server-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/server-web" charset="UTF-8" />
+  </component>
+</project>

@@ -1,0 +1,7 @@
+
+apply plugin: 'war'
+
+description = 'server-web Maven Webapp'
+dependencies {
+    testCompile group: 'junit', name: 'junit', version:'3.8.1'
+}

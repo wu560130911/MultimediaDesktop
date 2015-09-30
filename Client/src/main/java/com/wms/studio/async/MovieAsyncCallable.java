@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.wms.studio.async;
 
@@ -23,69 +23,68 @@ import com.wms.studio.utils.UserUtils;
 
 /**
  * @author WMS
- * 
  */
 public class MovieAsyncCallable implements Callable<Void> {
 
-	private static final Logger log = Logger
-			.getLogger(MovieAsyncCallable.class);
+    private static final Logger log = Logger
+            .getLogger(MovieAsyncCallable.class);
 
-	private final Model model;
-	private final MultipartFile movieFile;
-	private final MovieDto movieDto;
-	private final Date madeDate;
-	private final MovieService movieService;
-	private final String filePath;
+    private final Model model;
+    private final MultipartFile movieFile;
+    private final MovieDto movieDto;
+    private final Date madeDate;
+    private final MovieService movieService;
+    private final String filePath;
 
-	public MovieAsyncCallable(Model model, MultipartFile movieFile,
-			MovieDto movieDto, Date madeDate, MovieService movieService,
-			String filePath) {
-		this.madeDate = madeDate;
-		this.model = model;
-		this.movieDto = movieDto;
-		this.movieFile = movieFile;
-		this.movieService = movieService;
-		this.filePath = filePath;
-	}
+    public MovieAsyncCallable(Model model, MultipartFile movieFile,
+                              MovieDto movieDto, Date madeDate, MovieService movieService,
+                              String filePath) {
+        this.madeDate = madeDate;
+        this.model = model;
+        this.movieDto = movieDto;
+        this.movieFile = movieFile;
+        this.movieService = movieService;
+        this.filePath = filePath;
+    }
 
-	@Override
-	public Void call() throws Exception {
+    @Override
+    public Void call() throws Exception {
 
-		try {
+        try {
 
-			if (movieFile == null || movieFile.isEmpty() || movieDto == null
-					|| madeDate == null) {
-				throw new VerificationException("参数错误");
-			}
+            if (movieFile == null || movieFile.isEmpty() || movieDto == null
+                    || madeDate == null) {
+                throw new VerificationException("参数错误");
+            }
 
-			File movie = FileUtils.getMovieFile(filePath,
-					movieFile.getOriginalFilename());
-			StringUtils.isValidObject(movie, "文件格式错误或系统错误");
-			try {
-				movieFile.transferTo(movie);
-			} catch (IllegalStateException | IOException e) {
-				log.fatal("写入文件失败，请检查", e);
-				throw new VerificationException("写入文件错误");
-			}
-			movieDto.setFilename(movie.getName());
-			movieDto.setUserId(UserUtils.getCurrentUserId());
-			movieDto.setMadetime(madeDate);
-			movieDto.setSize(movieFile.getSize());
-			CommonResponseDto response = movieService.addMovie(movieDto);
+            File movie = FileUtils.getMovieFile(filePath,
+                    movieFile.getOriginalFilename());
+            StringUtils.isValidObject(movie, "文件格式错误或系统错误");
+            try {
+                movieFile.transferTo(movie);
+            } catch (IllegalStateException | IOException e) {
+                log.fatal("写入文件失败，请检查", e);
+                throw new VerificationException("写入文件错误");
+            }
+            movieDto.setFilename(movie.getName());
+            movieDto.setUserId(UserUtils.getCurrentUserId());
+            movieDto.setMadetime(madeDate);
+            movieDto.setSize(movieFile.getSize());
+            CommonResponseDto response = movieService.addMovie(movieDto);
 
-			if (response == null
-					|| UserConstant.SUCCESS != response.getResult()) {
-				throw new VerificationException(response.getErrorMessage());
-			} else {
-				model.addAttribute("success", true);
-			}
+            if (response == null
+                    || UserConstant.SUCCESS != response.getResult()) {
+                throw new VerificationException(response.getErrorMessage());
+            } else {
+                model.addAttribute("success", true);
+            }
 
-		} catch (VerificationException e) {
-			model.addAttribute("error", e.getMessage());
-			model.addAttribute("success", false);
-		}
+        } catch (VerificationException e) {
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("success", false);
+        }
 
-		return null;
-	}
+        return null;
+    }
 
 }

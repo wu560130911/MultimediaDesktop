@@ -1,0 +1,6 @@
+
+description = ''
+dependencies {
+  compile project(':domain:domain-transfer')
+  compile project(':domain:domain-common')
+}

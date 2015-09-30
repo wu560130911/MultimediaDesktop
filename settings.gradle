@@ -1,0 +1,48 @@
+rootProject.name = 'MultimediaDesktop'
+include ':cache:cache-api'
+include ':cache:cache-redis'
+include ':cache'
+include ':handler:handler-api'
+include ':handler:handler-server'
+include ':handler'
+include ':repository:repository-api'
+include ':repository:repository-impl'
+include ':repository'
+include ':domain:domain-entity'
+include ':domain:domain-transfer'
+include ':domain:domain-common'
+include ':domain'
+include ':service:service-api'
+include ':service:service-impl'
+include ':service'
+include ':utils:common-utils'
+include ':utils'
+include ':application:server-web'
+include ':application:admin-web'
+include ':application:server-app'
+include ':application'
+include ':test'
+
+project(':cache:cache-api').projectDir = "$rootDir/cache/cache-api" as File
+project(':cache:cache-redis').projectDir = "$rootDir/cache/cache-redis" as File
+project(':cache').projectDir = "$rootDir/cache" as File
+project(':handler:handler-api').projectDir = "$rootDir/handler/handler-api" as File
+project(':handler:handler-server').projectDir = "$rootDir/handler/handler-server" as File
+project(':handler').projectDir = "$rootDir/handler" as File
+project(':repository:repository-api').projectDir = "$rootDir/repository/repository-api" as File
+project(':repository:repository-impl').projectDir = "$rootDir/repository/repository-impl" as File
+project(':repository').projectDir = "$rootDir/repository" as File
+project(':domain:domain-entity').projectDir = "$rootDir/domain/domain-entity" as File
+project(':domain:domain-transfer').projectDir = "$rootDir/domain/domain-transfer" as File
+project(':domain:domain-common').projectDir = "$rootDir/domain/domain-common" as File
+project(':domain').projectDir = "$rootDir/domain" as File
+project(':service:service-api').projectDir = "$rootDir/service/service-api" as File
+project(':service:service-impl').projectDir = "$rootDir/service/service-impl" as File
+project(':service').projectDir = "$rootDir/service" as File
+project(':utils:common-utils').projectDir = "$rootDir/utils/common-utils" as File
+project(':utils').projectDir = "$rootDir/utils" as File
+project(':application:server-web').projectDir = "$rootDir/application/server-web" as File
+project(':application:admin-web').projectDir = "$rootDir/application/admin-web" as File
+project(':application:server-app').projectDir = "$rootDir/application/server-app" as File
+project(':application').projectDir = "$rootDir/application" as File
+project(':test').projectDir = "$rootDir/test" as File
