@@ -1,0 +1,1 @@
+log4j2=com.wms.studio.logs.Log4j2LoggerAdapter

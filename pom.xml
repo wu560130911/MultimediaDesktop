@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -27,27 +27,25 @@
 		<jackson.version>2.3.3</jackson.version>
 		<javassist.version>3.18.2-GA</javassist.version>
 		<taglibs-standard.version>1.1.2</taglibs-standard.version>
-		<joda-time.version>2.3</joda-time.version>
-		<freemarker.version>2.3.16</freemarker.version>
+		<joda-time.version>2.9.1</joda-time.version>
+		<freemarker.version>2.3.23</freemarker.version>
 		<validation-api.version>1.1.0.Final</validation-api.version>
 		<xmemcached.version>2.0.0</xmemcached.version>
 		<simple-spring-memcached.version>3.5.0</simple-spring-memcached.version>
 		<zkclient.version>0.1</zkclient.version>
 		<dubbo.version>2.5.3</dubbo.version>
-		<spring.version>4.1.6.RELEASE</spring.version>
-		<spring-data-jpa.version>1.8.0.RELEASE</spring-data-jpa.version>
-		<junit.version>4.11</junit.version>
+		<spring.version>4.2.4.RELEASE</spring.version>
+		<spring-data-jpa.version>1.9.2.RELEASE</spring-data-jpa.version>
+		<junit.version>4.12</junit.version>
 		<hibernate.validator.version>5.1.3.Final</hibernate.validator.version>
-		<druid-version>1.0.13</druid-version>
+		<druid-version>1.0.15</druid-version>
 		<hibernate-version>4.3.8.Final</hibernate-version>
 		<hibernate-jpa.version>1.0.0.Final</hibernate-jpa.version>
 		<shiro-version>1.2.3</shiro-version>
-		<mysql.jdbc.version>5.1.30</mysql.jdbc.version>
+		<mysql.jdbc.version>5.1.31</mysql.jdbc.version>
 		<log4jdbc.version>1.2</log4jdbc.version>
 		<servlet.api.version>3.1.0</servlet.api.version>
 		<kaptcha.version>2.3.2-20131019</kaptcha.version>
-		<slf4j.version>1.7.5</slf4j.version>
-		<log4j.version>1.2.17</log4j.version>
 		<hibernate-commons-annotations.version>4.0.4.Final</hibernate-commons-annotations.version>
 		<ehcache-core.version>2.6.10</ehcache-core.version>
 		<mail-version>1.5.1</mail-version>
@@ -68,13 +66,14 @@
 		<kaptcha.version>2.3</kaptcha.version>
 		<javax.el.version>2.2.4</javax.el.version>
 		<jgroups.version>3.6.2.Final</jgroups.version>
+		<log4j2.version>2.4.1</log4j2.version>
 		<ehcache-jgroupsreplication.version>1.7</ehcache-jgroupsreplication.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<!-- for maven compiler plugin -->
 		<maven_compiler_plugin_version>3.2</maven_compiler_plugin_version>
-		<java_source_version>1.7</java_source_version>
-		<java_target_version>1.7</java_target_version>
+		<java_source_version>1.8</java_source_version>
+		<java_target_version>1.8</java_target_version>
 		<file_encoding>UTF-8</file_encoding>
 		<maven_source_plugin_version>2.4</maven_source_plugin_version>
 		<maven_jar_plugin_version>2.6</maven_jar_plugin_version>
@@ -91,6 +90,30 @@
 	</properties>
 	<dependencyManagement>
 		<dependencies>
+
+			<!-- log4j2 start-->
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-api</artifactId>
+				<version>${log4j2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+				<version>${log4j2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-1.2-api</artifactId>
+				<version>${log4j2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-slf4j-impl</artifactId>
+				<version>${log4j2.version}</version>
+			</dependency>
+			<!-- log4j2 end -->
+
 			<!-- spring json begin -->
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
@@ -223,21 +246,7 @@
 				<artifactId>javax.servlet-api</artifactId>
 				<version>${servlet.api.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>${slf4j.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>${slf4j.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>${log4j.version}</version>
-			</dependency>
+
 			<!-- SECURITY begin -->
 			<dependency>
 				<groupId>commons-codec</groupId>

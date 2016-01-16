@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG">
+    <Properties>
+        <Property name="logPath">logs</Property>
+        <Property name="backupPath">${logPath}/backup/</Property>
+        <Property name="logFileName">server</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="rollingFile" fileName="${logPath}${logFileName}.log"
+                     filePattern="${backupPath}${logFileName}-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout>
+                <Pattern>%d - %logger{3} [%thread] %-5level %class{3}(%line) %NDC - %msg%n</Pattern>
+            </PatternLayout>
+            <TimeBasedTriggeringPolicy modulate="true"
+                                       interval="24"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="DEBUG">
+            <AppenderRef ref="rollingFile"/>
+        </Root>
+        <Logger name="org.apache.zookeeper" level="INFO"/>
+        <Logger name="com.alibaba.dubbo" level="INFO"/>
+        <Logger name="org.I0Itec.zkclient" level="INFO"/>
+        <Logger name="jdbc.sqlonly" level="INFO"/>
+    </Loggers>
+</Configuration>
