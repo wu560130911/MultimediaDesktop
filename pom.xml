@@ -62,7 +62,7 @@
 		<asm.version>3.3.1</asm.version>
 		<guava.version>14.0.1</guava.version>
 		<commons-lang3.version>3.1</commons-lang3.version>
-		<commons-collections.version>3.2.1</commons-collections.version>
+		<commons-collections.version>3.2.2</commons-collections.version>
 		<commons-fileupload.version>1.2.2</commons-fileupload.version>
 		<commons-httpclient.version>3.1</commons-httpclient.version>
 		<kaptcha.version>2.3</kaptcha.version>
