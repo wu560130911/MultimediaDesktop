@@ -17,40 +17,39 @@
 * [系统功能](#h6)
 * [系统功能截图](#h8)
 
-<a name="h1"/>
-## 系统项目结构
+## <a name="h1"/>系统项目结构
 系统整个是一个Maven项目，包含三个子项目，分别是:Server-API、Server、Client。其中Server-API主要包含一些基本工具类和服务接口等，Server主要是业务逻辑和数据持久化，Client主要是WEB服务，处理web请求。
 
-<a name="h2"/>
-## 系统构架
+
+## <a name="h2"/>系统构架
 ![](deploy/pictures/system.png)
 <br>
 系统构架采用目前中小型公司常用的构架方式。
 
-<a name="h3"/>
-## 系统采用的技术
+
+## <a name="h3"/>系统采用的技术
 系统采用的技术主要有：Dubbo,memcache,mail,spring,fastjson,hibernate,druid,freemarker,jpa,spring data jpa,servlet3.1,shiro,fastjson,spring mvc,extjs4等<br>
 ## 系统依赖的工具
 Zookeeper，MemCache，Mysql（默认，可选择其他的），Tomcat（默认，可以选择其他的），Maven，JDK 1.7+，dubbo admin，dubbo monitor
 <br>
-<a name="h4"/>
-## 系统处理流程
+
+## <a name="h4"/>系统处理流程
 系统最外层由nginx进行处理，然后nginx对请求进行转发（静态文件和媒体文件特殊处理），如图所示。<br>
 ![](deploy/pictures/Nginx.png)<br>
 当nginx分发请求到web集群后，web端的处理流程如图所示。<br>
 ![](deploy/pictures/webHandler.png)<br>
-<a name="h5"/>
-## 如何部署本系统
+
+## <a name="h5"/>如何部署本系统
 在deploy/sql里包含本系统的sql文件，导入数据库即可。管理员账号：wu560130911，密码：1234567
 项目对打包进行了处理，服务端将打包成文件夹，包含执行脚本。消费端将打包成文件夹（war文件）和静态资源文件（经过压缩）。
 请参见本人博文，[分布式桌面多媒体共享平台](http://my.oschina.net/WMSstudio/blog/408026)。<br>
-<a name="h6"/>
-## 系统功能
+
+## <a name="h6"/>系统功能
 系统采用shiro作为安全框架，目前只有三个角色的用户，使用Memcache作为分布式会话缓存（不依赖容器），将用户权限等信息存放在缓存中，如图所示。<br>
 ![](deploy/pictures/function.png)<br>
 ![](deploy/pictures/Handler.png)<br>
-<a name="h8"/>
-## 系统功能截图
+
+## <a name="h8"/>系统功能截图
 ![](deploy/pictures/1.png)<br>
 ![](deploy/pictures/2.png)<br>
 ![](deploy/pictures/3.png)<br>
